@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+    <title>Testimonials - Hermes Tutoring</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+                </a>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="testimonials.html" class="nav-link active">Testimonials</a>
+                <a href="contact.html" class="nav-link">Contact Us</a>
+                <div class="cart-icon" id="cartIcon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cart body -->
+                        <path d="M6 8H28L26 20H8L6 8Z" fill="#2c5aa0" stroke="#2c5aa0" stroke-width="1.5"/>
+                        <!-- Cart handle -->
+                        <path d="M6 8L4 4H2" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Cart wheels -->
+                        <circle cx="10" cy="26" r="2" fill="#2c5aa0"/>
+                        <circle cx="24" cy="26" r="2" fill="#2c5aa0"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Testimonials Hero -->
+    <section class="testimonials-hero-new">
+        <div class="container">
+            <h1>What Our Students Say</h1>
+            <p>Real success stories from students who have achieved their academic goals with Hermes Tutoring</p>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="testimonials-container">
+                <div class="testimonials-scroll">
+                    <!-- First set of testimonials -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">AJ</div>
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            "Hermes Tutoring transformed my math skills completely. Alp's teaching methods helped me improve my SHT score by 280 points! The personalized approach made all the difference."
+                        </p>
+                        <h4 class="testimonial-name">Alex Johnson</h4>
+                        <p class="testimonial-title">High School Senior, SHT Score: 1520</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">SM</div>
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            "I was struggling with AP Calculus, but Benjamin's patient explanations and step-by-step approach helped me not only pass but excel. I got a 5 on the AP exam!"
+                        </p>
+                        <h4 class="testimonial-name">Sophie Martinez</h4>
+                        <p class="testimonial-title">College Freshman, AP Calculus Score: 5</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">RW</div>
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            "The college consulting service was invaluable. Emily helped me craft compelling essays and navigate the application process. I got into my dream school!"
+                        </p>
+                        <h4 class="testimonial-name">Ryan Williams</h4>
+                        <p class="testimonial-title">Accepted to MIT</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">LD</div>
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            "I had severe math anxiety, but Lisa's supportive approach helped me build confidence. Now I actually enjoy math and my grades have improved dramatically."
+                        </p>
+                        <h4 class="testimonial-name">Liam Davis</h4>
+                        <p class="testimonial-title">Middle School Student</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">KC</div>
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            "The ACT prep course was fantastic. David's strategies for time management and problem-solving helped me increase my composite score by 6 points!"
+                        </p>
+                        <h4 class="testimonial-name">Katie Chen</h4>
+                        <p class="testimonial-title">High School Junior, ACT Score: 34</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">MT</div>
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            "Amanda's tutoring in geometry was incredible. She made complex concepts easy to understand with visual aids and real-world examples."
+                        </p>
+                        <h4 class="testimonial-name">Marcus Thompson</h4>
+                        <p class="testimonial-title">High School Sophomore</p>
+                    </div>
+
+                    <!-- Duplicate set for seamless scrolling -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">AJ</div>
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            "Hermes Tutoring transformed my math skills completely. Alp's teaching methods helped me improve my SHT score by 280 points! The personalized approach made all the difference."
+                        </p>
+                        <h4 class="testimonial-name">Alex Johnson</h4>
+                        <p class="testimonial-title">High School Senior, SHT Score: 1520</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">SM</div>
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            "I was struggling with AP Calculus, but Benjamin's patient explanations and step-by-step approach helped me not only pass but excel. I got a 5 on the AP exam!"
+                        </p>
+                        <h4 class="testimonial-name">Sophie Martinez</h4>
+                        <p class="testimonial-title">College Freshman, AP Calculus Score: 5</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">RW</div>
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            "The college consulting service was invaluable. Emily helped me craft compelling essays and navigate the application process. I got into my dream school!"
+                        </p>
+                        <h4 class="testimonial-name">Ryan Williams</h4>
+                        <p class="testimonial-title">Accepted to MIT</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">LD</div>
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            "I had severe math anxiety, but Lisa's supportive approach helped me build confidence. Now I actually enjoy math and my grades have improved dramatically."
+                        </p>
+                        <h4 class="testimonial-name">Liam Davis</h4>
+                        <p class="testimonial-title">Middle School Student</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">KC</div>
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            "The ACT prep course was fantastic. David's strategies for time management and problem-solving helped me increase my composite score by 6 points!"
+                        </p>
+                        <h4 class="testimonial-name">Katie Chen</h4>
+                        <p class="testimonial-title">High School Junior, ACT Score: 34</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">MT</div>
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            "Amanda's tutoring in geometry was incredible. She made complex concepts easy to understand with visual aids and real-world examples."
+                        </p>
+                        <h4 class="testimonial-name">Marcus Thompson</h4>
+                        <p class="testimonial-title">High School Sophomore</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="score-guarantee">
+        <div class="container">
+            <div class="guarantee-content">
+                <h2 class="guarantee-title">Ready to Join Our Success Stories?</h2>
+                <p class="guarantee-text">Book your free consultation today and start your journey to academic excellence.</p>
+                <a href="consultation.html" class="cta-button">Book a FREE Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+                </div>
+                <p class="footer-text">&copy; 2025 Hermes Tutoring. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Popup -->
+    <div class="cart-popup" id="cartPopup">
+        <div class="cart-popup-content">
+            <div class="cart-popup-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-cart" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="cart-total" id="cartTotal">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price">$0</span>
+                </div>
+            </div>
+            <div class="cart-actions">
+                <button class="checkout-btn" id="checkoutBtn">Checkout with Stripe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buy Now Popup -->
+    <div class="buy-now-popup" id="buyNowPopup">
+        <div class="buy-now-popup-content">
+            <div class="buy-now-popup-header">
+                <h3>Complete Purchase</h3>
+                <button class="close-buy-now" id="closeBuyNow">&times;</button>
+            </div>
+            <div class="buy-now-item" id="buyNowItem">
+                <!-- Item details will be populated here -->
+            </div>
+            <div class="buy-now-total" id="buyNowTotal">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price">$0</span>
+                </div>
+            </div>
+            <div class="buy-now-actions">
+                <button class="complete-purchase-btn" id="completePurchaseBtn">Buy Now with Stripe</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

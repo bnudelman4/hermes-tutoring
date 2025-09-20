@@ -1,0 +1,9 @@
+{
+  "name": "hermes-tutoring-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for Hermes Tutoring Stripe integration",
+  "main": "index.js",
+  "dependencies": {
+    "stripe": "^14.0.0"
+  }
+}

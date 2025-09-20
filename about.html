@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+    <title>About Us - Hermes Tutoring</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+                </a>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="about.html" class="nav-link active">About Us</a>
+                <a href="testimonials.html" class="nav-link">Testimonials</a>
+                <a href="contact.html" class="nav-link">Contact Us</a>
+                <div class="cart-icon" id="cartIcon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cart body -->
+                        <path d="M6 8H28L26 20H8L6 8Z" fill="#2c5aa0" stroke="#2c5aa0" stroke-width="1.5"/>
+                        <!-- Cart handle -->
+                        <path d="M6 8L4 4H2" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Cart wheels -->
+                        <circle cx="10" cy="26" r="2" fill="#2c5aa0"/>
+                        <circle cx="24" cy="26" r="2" fill="#2c5aa0"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- About Hero -->
+    <section class="about-hero-new">
+        <div class="container">
+            <h1>About Us</h1>
+            <p>Meet our team of expert educators dedicated to your academic success</p>
+        </div>
+    </section>
+
+    <!-- Lead Tutors -->
+    <section class="lead-tutors">
+        <div class="container">
+            <h2 class="section-title">Our Lead Tutors</h2>
+            <div class="tutor-grid">
+                <div class="tutor-card">
+                    <div class="tutor-photo">
+                        <img src="src/alp.png" alt="Alp Vargelci" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
+                    <h3>Alp Vargelci</h3>
+                    <p class="tutor-title">Founder, Lead Math Tutor, and Lead College Consultant</p>
+                    <p class="tutor-bio">
+                        Alp is a sophomore at Cornell University studying Electrical & Computer Engineering and Physics. He has extensive tutoring experience in STEM subjects, with a focus on SAT/ACT preparation, advanced mathematics, and physics. In addition to test prep, Alp is the lead college consultant at Hermes Tutoring and has guided over a dozen students through their essays, applications, and admissions process—helping them gain acceptance to their dream schools. Drawing on his own top 1% SAT score and strong academic background, he has helped many students reach their goals with a track record of success. His teaching and consulting philosophy emphasizes building confidence and true understanding, empowering students to present their best selves academically and personally.
+                    </p>
+                </div>
+
+                <div class="tutor-card">
+                    <div class="tutor-photo">
+                        <img src="src/ben.JPG" alt="Benjamin Nudelman" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
+                    <h3>Benjamin Nudelman</h3>
+                    <p class="tutor-title">Co-Founder, Lead Test Prep Specialist, and Lead Preparatory Tutor</p>
+                    <p class="tutor-bio">
+                        Ben is a sophomore at Cornell University studying Computer Science in the college of Engineering. He has considerable tutoring experience with the SAT, ACT, Computer Science and K-12 Math and English, and he scored a 1570 on the SAT. Coming from leading a nonprofit, school-related high school tutoring program, Ben understands the impact educational aid can have on every student and their academic performance. Ben hopes to reciprocate the help he received from educators throughout high school, employing a similar style of teaching to maximize the learning and growth of each student. He hopes to tailor his aid to each student specifically and guide students through the process of standardized testing. His approach revolves around providing mini-lessons, reviewing problem solving strategies, and going through practice problems. Like those of Hermes Tutoring, his goals are to help students improve time management, master content, and familiarize themselves with general exam strategies in order to achieve success.                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Other Tutors -->
+    <section class="other-tutors">
+        <div class="container">
+            <h2 class="section-title">Our Expert Team</h2>
+            <div class="tutors-grid">
+                <div class="tutor-card-small">
+                    <div class="tutor-photo-small">
+                        <img src="src/MAbrarHasnat.jpg" alt="M M Abrar Hasnat" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
+                    <h4>M M Abrar Hasnat</h4>
+                    <p class="tutor-university">Cornell University</p>
+                    <p class="tutor-specialty">SAT/ACT</p>
+                </div>
+
+                <div class="tutor-card-small">
+                    <div class="tutor-photo-small">
+                        <img src="src/ArielleNudelman.PNG" alt="Arielle Nudelman" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
+                    <h4>Arielle Nudelman</h4>
+                    <p class="tutor-university">Cornell University</p>
+                    <p class="tutor-specialty">Approved College Consultant</p>
+                </div>
+
+                <div class="tutor-card-small">
+                    <div class="tutor-photo-small">
+                        <img src="src/TenzinSamchok.jpg" alt="Tenzin Samchok" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
+                    <h4>Tenzin Samchok</h4>
+                    <p class="tutor-university">New York University</p>
+                    <p class="tutor-specialty">SAT/ACT, AP Chemistry, Preparatory Tutelage</p>
+                </div>
+
+                <div class="tutor-card-small">
+                    <div class="tutor-photo-small">
+                        <img src="src/GloriaLane.jpg" alt="Gloria Lane" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
+                    <h4>Gloria Lane</h4>
+                    <p class="tutor-university">Cornell University</p>
+                    <p class="tutor-specialty">Approved College Consultant, AP History + Humanities</p>
+                </div>
+
+                <div class="tutor-card-small">
+                    <div class="tutor-photo-small">
+                        <img src="src/AndrewRafaelSaid.jpg" alt="Andrew Rafael-Said" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
+                    <h4>Andrew Rafael-Said</h4>
+                    <p class="tutor-university">Cornell University</p>
+                    <p class="tutor-specialty">SAT/ACT, AP Chemistry, AP Biology, AP English, Preparatory Tutelage</p>
+                </div>
+
+                <div class="tutor-card-small">
+                    <div class="tutor-photo-small">CL</div>
+                    <h4>CL</h4>
+                    <p class="tutor-university">Cornell University</p>
+                    <p class="tutor-specialty">SAT/ACT, Preparatory Tutelage, Advanced Mathematics, Approved College Consultant</p>
+                </div>
+
+                <div class="tutor-card-small">
+                    <div class="tutor-photo-small">
+                        <img src="src/PhillipSolo.jpg" alt="Phillip Solo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
+                    <h4>Phillip Solo</h4>
+                    <p class="tutor-university">Macaulay Honors College</p>
+                    <p class="tutor-specialty">AP Chemistry, AP Physics, AP English, AP History + Humanities</p>
+                </div>
+
+                <div class="tutor-card-small">
+                    <div class="tutor-photo-small">JH</div>
+                    <h4>JH</h4>
+                    <p class="tutor-university">Cornell University</p>
+                    <p class="tutor-specialty">SAT/ACT, Preparatory Tutelage</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Statement -->
+    <section class="description-section">
+        <div class="container">
+            <div class="description-content">
+                <h2 class="section-title">Our Mission</h2>
+                <p class="description-text">
+                    At Hermes Tutoring, we believe that every student has the potential to excel in mathematics. Our mission is to 
+                    provide personalized, high-quality tutoring that not only improves academic performance but also builds 
+                    confidence and critical thinking skills that last a lifetime.
+                </p>
+                <p class="description-text">
+                    We understand that each student learns differently, which is why we tailor our approach to meet individual 
+                    needs. Our experienced tutors use proven methodologies and innovative teaching techniques to make complex 
+                    mathematical concepts accessible and engaging.
+                </p>
+                <p class="description-text">
+                    Whether you're preparing for standardized tests, struggling with a particular subject, or looking to get 
+                    ahead in your studies, our team is committed to helping you achieve your academic goals and unlock your 
+                    full potential.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+                </div>
+                <p class="footer-text">&copy; 2025 Hermes Tutoring. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Popup -->
+    <div class="cart-popup" id="cartPopup">
+        <div class="cart-popup-content">
+            <div class="cart-popup-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-cart" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="cart-total" id="cartTotal">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price">$0</span>
+                </div>
+            </div>
+            <div class="cart-actions">
+                <button class="checkout-btn" id="checkoutBtn">Checkout with Stripe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buy Now Popup -->
+    <div class="buy-now-popup" id="buyNowPopup">
+        <div class="buy-now-popup-content">
+            <div class="buy-now-popup-header">
+                <h3>Complete Purchase</h3>
+                <button class="close-buy-now" id="closeBuyNow">&times;</button>
+            </div>
+            <div class="buy-now-item" id="buyNowItem">
+                <!-- Item details will be populated here -->
+            </div>
+            <div class="buy-now-total" id="buyNowTotal">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price">$0</span>
+                </div>
+            </div>
+            <div class="buy-now-actions">
+                <button class="complete-purchase-btn" id="completePurchaseBtn">Buy Now with Stripe</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

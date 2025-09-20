@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - Hermes Tutoring</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="testimonials.html" class="nav-link">Testimonials</a>
+                <a href="contact.html" class="nav-link">Contact Us</a>
+                <div class="cart-icon" id="cartIcon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.7 15.3C4.3 15.7 4.6 16.5 5.1 16.5H17M17 13V17C17 18.1 17.9 19 19 19C20.1 19 21 18.1 21 17V13M9 19.5C9.8 19.5 10.5 20.2 10.5 21S9.8 22.5 9 22.5 7.5 21.8 7.5 21 8.2 19.5 9 19.5ZM20 19.5C20.8 19.5 21.5 20.2 21.5 21S20.8 22.5 20 22.5 18.5 21.8 18.5 21 19.2 19.5 20 19.5Z" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Success Section -->
+    <section class="success-section">
+        <div class="container">
+            <div class="success-content">
+                <div class="success-icon">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#28a745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h1>Payment Successful!</h1>
+                <p class="success-message">Thank you for your purchase! Your payment has been processed successfully.</p>
+                
+                <div class="next-steps">
+                    <h3>What's Next?</h3>
+                    <ul>
+                        <li>You will receive a confirmation email with your order details</li>
+                        <li>Our team will contact you within 24 hours to schedule your first session</li>
+                        <li>You can access your tutoring materials through our student portal</li>
+                    </ul>
+                </div>
+
+                <div class="success-actions">
+                    <a href="index.html" class="success-btn primary">Return Home</a>
+                    <a href="contact.html" class="success-btn secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+                </div>
+                <p class="footer-text">&copy; 2025 Hermes Tutoring. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Popup -->
+    <div class="cart-popup" id="cartPopup">
+        <div class="cart-popup-content">
+            <div class="cart-popup-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-cart" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="cart-total" id="cartTotal">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price">$0</span>
+                </div>
+            </div>
+            <div class="cart-actions">
+                <button class="checkout-btn" id="checkoutBtn">Checkout with Stripe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buy Now Popup -->
+    <div class="buy-now-popup" id="buyNowPopup">
+        <div class="buy-now-popup-content">
+            <div class="buy-now-popup-header">
+                <h3>Complete Purchase</h3>
+                <button class="close-buy-now" id="closeBuyNow">&times;</button>
+            </div>
+            <div class="buy-now-item" id="buyNowItem">
+                <!-- Item details will be populated here -->
+            </div>
+            <div class="buy-now-total" id="buyNowTotal">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price">$0</span>
+                </div>
+            </div>
+            <div class="buy-now-actions">
+                <button class="complete-purchase-btn" id="completePurchaseBtn">Buy Now with Stripe</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Clear cart after successful purchase
+        localStorage.removeItem('hermesCart');
+        localStorage.removeItem('hermesCartCount');
+        
+        // Get session ID from URL if available
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+        
+        if (sessionId) {
+            console.log('Stripe session ID:', sessionId);
+            // You could use this to fetch order details from your backend
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

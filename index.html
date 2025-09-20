@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+    <title>Hermes Tutoring - Online College Consulting and Test Prep Experts</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+                </a>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="testimonials.html" class="nav-link">Testimonials</a>
+                <a href="contact.html" class="nav-link">Contact Us</a>
+                <div class="cart-icon" id="cartIcon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cart body -->
+                        <path d="M6 8H28L26 20H8L6 8Z" fill="#2c5aa0" stroke="#2c5aa0" stroke-width="1.5"/>
+                        <!-- Cart handle -->
+                        <path d="M6 8L4 4H2" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Cart wheels -->
+                        <circle cx="10" cy="26" r="2" fill="#2c5aa0"/>
+                        <circle cx="24" cy="26" r="2" fill="#2c5aa0"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="hero-title">Hermes Tutoring</h1>
+                <h2 class="hero-subtitle">Online College Consulting and Test Prep Experts</h2>
+                <p class="hero-description">Knowledge delivered swiftly</p>
+                <a href="consultation.html" class="cta-button">Book a FREE 20-minute consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Score Guarantee Section -->
+    <section class="score-guarantee">
+        <div class="container">
+            <div class="guarantee-content">
+                <h2 class="guarantee-title">Score Improvement Guarantee</h2>
+                <p class="guarantee-text">We guarantee significant score improvements when students follow our proven methods and complete our structured program.</p>
+                <p class="guarantee-fine-print">*Results may vary based on student commitment and practice. While we can't guarantee 100% success, our methods have helped 95%+ of students achieve their target scores.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="video-container">
+                <iframe 
+                    width="100%" 
+                    height="400" 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="Hermes Tutoring Introduction"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section class="description-section">
+        <div class="container">
+            <div class="description-content">
+                <p class="description-text">
+                    At Hermes Tutoring, we are dedicated to empowering students in math through personalized, high-impact tutoring. 
+                    Founded by experienced educators and test prep specialists, our expert tutors specialize in tailored support 
+                    for students from elementary school to college level. We use proven methodologies to encourage critical 
+                    thinking and deeper understanding of mathematical concepts.
+                </p>
+                <p class="description-text">
+                    Our flexible online tutoring sessions are designed to fit each student's unique schedule and learning style, 
+                    offering a seamless learning experience from home. We cover various services including homework help, 
+                    exam preparation, and college readiness, helping students build confidence and master math at their own pace.
+                </p>
+                <p class="description-text">
+                    We believe that math success is not just about solving problems, but about building a mindset for 
+                    lifelong learning and achievement. Our comprehensive approach ensures students not only improve their 
+                    scores but develop the skills and confidence needed for future success.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+                </div>
+                <p class="footer-text">&copy; 2025 Hermes Tutoring. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Popup -->
+    <div class="cart-popup" id="cartPopup">
+        <div class="cart-popup-content">
+            <div class="cart-popup-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-cart" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="cart-total" id="cartTotal">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price">$0</span>
+                </div>
+            </div>
+            <div class="cart-actions">
+                <button class="checkout-btn" id="checkoutBtn">Checkout with Stripe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buy Now Popup -->
+    <div class="buy-now-popup" id="buyNowPopup">
+        <div class="buy-now-popup-content">
+            <div class="buy-now-popup-header">
+                <h3>Complete Purchase</h3>
+                <button class="close-buy-now" id="closeBuyNow">&times;</button>
+            </div>
+            <div class="buy-now-item" id="buyNowItem">
+                <!-- Item details will be populated here -->
+            </div>
+            <div class="buy-now-total" id="buyNowTotal">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price">$0</span>
+                </div>
+            </div>
+            <div class="buy-now-actions">
+                <button class="complete-purchase-btn" id="completePurchaseBtn">Buy Now with Stripe</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

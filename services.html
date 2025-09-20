@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+    <title>Services - Hermes Tutoring</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+                </a>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link active">Services</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="testimonials.html" class="nav-link">Testimonials</a>
+                <a href="contact.html" class="nav-link">Contact Us</a>
+                <div class="cart-icon" id="cartIcon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cart body -->
+                        <path d="M6 8H28L26 20H8L6 8Z" fill="#2c5aa0" stroke="#2c5aa0" stroke-width="1.5"/>
+                        <!-- Cart handle -->
+                        <path d="M6 8L4 4H2" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Cart wheels -->
+                        <circle cx="10" cy="26" r="2" fill="#2c5aa0"/>
+                        <circle cx="24" cy="26" r="2" fill="#2c5aa0"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Services Hero -->
+    <section class="services-hero-new">
+        <div class="container">
+            <h1>Our Services</h1>
+            
+            <div class="services-intro">
+                <div class="intro-text">
+                    <h2>Get Results.</h2>
+                    <h3>Affordable. Risk-Free.</h3>
+                    <p>We guarantee significant score improvements when students follow our proven methods. Flexible payment options available.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Elite Packages Row -->
+    <section class="services-packages-section">
+        <div class="container">
+            <div class="packages-row elite-row">
+                <div class="service-package elite-package">
+                    <div class="package-header">
+                        <h3>Elite Package</h3>
+                        <p>Granted 50 hours, hours can be used for either college consulting or academic tutoring.</p>
+                    </div>
+                    <div class="package-pricing">
+                        <span class="price">$3,250</span>
+                        <span class="hourly-price">$65/hour</span>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>✓ Tutored by Ivy League students</li>
+                            <li>✓ 50 flexible hours</li>
+                            <li>✓ College consulting or academic tutoring</li>
+                            <li>✓ Score Improvement Guarantee</li>
+                            <li>✓ Personalized study plan</li>
+                            <li>✓ Flexible scheduling</li>
+                        </ul>
+                    </div>
+                    <div class="package-buttons">
+                        <button class="add-to-cart-btn" data-package="elite" data-price="3250" data-name="Elite Package">Add to Cart</button>
+                        <button class="buy-now-btn" data-package="elite" data-price="3250" data-name="Elite Package">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="service-package elite-package">
+                    <div class="package-header">
+                        <h3>SAT/ACT Elite Package</h3>
+                        <p>Access to all academic one-on-one tutoring with access to SHT group sessions, added score guarantees.</p>
+                    </div>
+                    <div class="package-pricing">
+                        <span class="price">$2,010</span>
+                        <span class="hourly-price">$67/hour</span>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>✓ Tutored by Ivy League students</li>
+                            <li>✓ 40 academic tutoring hours</li>
+                            <li>✓ Access to SHT group sessions</li>
+                            <li>✓ Score Improvement Guarantee</li>
+                            <li>✓ Personalized study plan</li>
+                            <li>✓ Flexible scheduling</li>
+                        </ul>
+                    </div>
+                    <div class="package-buttons">
+                        <button class="add-to-cart-btn" data-package="sat-act-elite" data-price="2010" data-name="SHT/ACT Elite Package">Add to Cart</button>
+                        <button class="buy-now-btn" data-package="sat-act-elite" data-price="2010" data-name="SHT/ACT Elite Package">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Middle Packages Row -->
+    <section class="services-packages-section">
+        <div class="container">
+            <div class="packages-row middle-row">
+                <div class="service-package">
+                    <div class="package-header">
+                        <h3>College Readiness Package</h3>
+                        <p>Access to team of college consultants and one-on-one essay workshopping.</p>
+                    </div>
+                    <div class="package-pricing">
+                        <span class="price">$1,275</span>
+                        <span class="hourly-price">$80/hour</span>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>✓ Tutored by Ivy League students</li>
+                            <li>✓ 15 college consulting hours</li>
+                            <li>✓ Team of college consultants</li>
+                            <li>✓ One-on-one essay workshopping</li>
+                            <li>✓ Application strategy</li>
+                            <li>✓ Flexible scheduling</li>
+                        </ul>
+                    </div>
+                    <div class="package-buttons">
+                        <button class="add-to-cart-btn" data-package="college-readiness" data-price="1275" data-name="College Readiness Package">Add to Cart</button>
+                        <button class="buy-now-btn" data-package="college-readiness" data-price="1275" data-name="College Readiness Package">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="service-package">
+                    <div class="package-header">
+                        <h3>Standard Package</h3>
+                        <p>Access to all academic one-on-one tutoring hours and group sessions.</p>
+                    </div>
+                    <div class="package-pricing">
+                        <span class="price">$1,500</span>
+                        <span class="hourly-price">$75/hour</span>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>✓ Tutored by Ivy League students</li>
+                            <li>✓ 20 academic tutoring hours</li>
+                            <li>✓ One-on-one tutoring</li>
+                            <li>✓ Group sessions included</li>
+                            <li>✓ Score Improvement Guarantee</li>
+                            <li>✓ Flexible scheduling</li>
+                        </ul>
+                    </div>
+                    <div class="package-buttons">
+                        <button class="add-to-cart-btn" data-package="standard" data-price="1500" data-name="Standard Package">Add to Cart</button>
+                        <button class="buy-now-btn" data-package="standard" data-price="1500" data-name="Standard Package">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="service-package">
+                    <div class="package-header">
+                        <h3>Starter Package</h3>
+                        <p>Access to all academic one-on-one tutoring hours.</p>
+                    </div>
+                    <div class="package-pricing">
+                        <span class="price">$390</span>
+                        <span class="hourly-price">$78/hour</span>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>✓ Tutored by Ivy League students</li>
+                            <li>✓ 5 academic hours</li>
+                            <li>✓ One-on-one tutoring</li>
+                            <li>✓ Score Improvement Guarantee</li>
+                            <li>✓ Personalized study plan</li>
+                            <li>✓ Flexible scheduling</li>
+                        </ul>
+                    </div>
+                    <div class="package-buttons">
+                        <button class="add-to-cart-btn" data-package="starter" data-price="390" data-name="Starter Package">Add to Cart</button>
+                        <button class="buy-now-btn" data-package="starter" data-price="390" data-name="Starter Package">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Individual Packages Row -->
+    <section class="services-packages-section">
+        <div class="container">
+            <div class="packages-row individual-row">
+                <div class="service-package individual-package">
+                    <div class="package-header">
+                        <h3>Individual Session</h3>
+                        <p>Access to one academic session of your choice.</p>
+                    </div>
+                    <div class="package-pricing">
+                        <span class="price">$80</span>
+                        <span class="hourly-price">$80/hour</span>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>✓ Tutored by Ivy League students</li>
+                            <li>✓ 1 academic hour</li>
+                            <li>✓ One-on-one tutoring</li>
+                            <li>✓ Flexible scheduling</li>
+                            <li>✓ Choose your subject</li>
+                        </ul>
+                    </div>
+                    <div class="package-buttons">
+                        <button class="add-to-cart-btn" data-package="individual" data-price="80" data-name="Individual Session">Add to Cart</button>
+                        <button class="buy-now-btn" data-package="individual" data-price="80" data-name="Individual Session">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="service-package individual-package">
+                    <div class="package-header">
+                        <h3>Individual College Consulting Session</h3>
+                        <p>Access to one college consulting session.</p>
+                    </div>
+                    <div class="package-pricing">
+                        <span class="price">$100</span>
+                        <span class="hourly-price">$100/hour</span>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>✓ Tutored by Ivy League students</li>
+                            <li>✓ 1 college consulting hour</li>
+                            <li>✓ Application strategy</li>
+                            <li>✓ Essay guidance</li>
+                            <li>✓ Flexible scheduling</li>
+                        </ul>
+                    </div>
+                    <div class="package-buttons">
+                        <button class="add-to-cart-btn" data-package="college-individual" data-price="100" data-name="Individual College Consulting Session">Add to Cart</button>
+                        <button class="buy-now-btn" data-package="college-individual" data-price="100" data-name="Individual College Consulting Session">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Popup -->
+    <div class="cart-popup" id="cartPopup">
+        <div class="cart-popup-content">
+            <div class="cart-popup-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-cart" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="cart-total" id="cartTotal">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price">$0</span>
+                </div>
+            </div>
+            <div class="cart-actions">
+                <button class="checkout-btn" id="checkoutBtn">Checkout with Stripe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buy Now Popup -->
+    <div class="buy-now-popup" id="buyNowPopup">
+        <div class="buy-now-popup-content">
+            <div class="buy-now-popup-header">
+                <h3>Complete Purchase</h3>
+                <button class="close-buy-now" id="closeBuyNow">&times;</button>
+            </div>
+            <div class="buy-now-item" id="buyNowItem">
+                <!-- Item details will be populated here -->
+            </div>
+            <div class="buy-now-total" id="buyNowTotal">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price">$0</span>
+                </div>
+            </div>
+            <div class="buy-now-actions">
+                <button class="complete-purchase-btn" id="completePurchaseBtn">Buy Now with Stripe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Consultation Button Section -->
+    <section class="consultation-cta-section">
+        <div class="container">
+            <div class="consultation-cta-content">
+                <h3>Ready to Get Started?</h3>
+                <p>Book a FREE 20-minute consultation to discuss your academic goals and find the perfect tutoring package for you.</p>
+                <a href="consultation.html" class="consultation-cta-btn">Book a FREE Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+                </div>
+                <p class="footer-text">&copy; 2025 Hermes Tutoring. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

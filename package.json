@@ -1,0 +1,28 @@
+{
+  "name": "hermes-tutoring-website",
+  "version": "1.0.0",
+  "description": "A professional website for Aegis Tutoring, featuring responsive design and Netlify form integration.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bnudelman4/aegis-tutoring.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/bnudelman4/aegis-tutoring/issues"
+  },
+  "homepage": "https://github.com/bnudelman4/aegis-tutoring#readme",
+  "dependencies": {
+    "stripe": "^14.0.0"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+    <title>Book Consultation - Hermes Tutoring</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+                </a>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="testimonials.html" class="nav-link">Testimonials</a>
+                <a href="contact.html" class="nav-link">Contact Us</a>
+                <div class="cart-icon" id="cartIcon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cart body -->
+                        <path d="M6 8H28L26 20H8L6 8Z" fill="#2c5aa0" stroke="#2c5aa0" stroke-width="1.5"/>
+                        <!-- Cart handle -->
+                        <path d="M6 8L4 4H2" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Cart wheels -->
+                        <circle cx="10" cy="26" r="2" fill="#2c5aa0"/>
+                        <circle cx="24" cy="26" r="2" fill="#2c5aa0"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Consultation Hero -->
+    <section class="consultation-hero">
+        <div class="container">
+            <h1>Book Your FREE Consultation</h1>
+            <p>Schedule a 20-minute consultation to discuss your academic goals and how we can help you succeed.</p>
+        </div>
+    </section>
+
+    <!-- Consultation Form Section -->
+    <section class="contact-section-new">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Consultation Info Card -->
+                <div class="contact-info-card">
+                    <h2 style="color: #1e3a5f; margin-bottom: 30px; font-size: 1.8rem;">What to Expect</h2>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="#2c5aa0" stroke-width="2"/>
+                                <polyline points="12,6 12,12 16,14" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h3>20-Minute Session</h3>
+                            <p>Comprehensive assessment of your academic needs and goals</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 12L11 14L15 10" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="12" cy="12" r="10" stroke="#2c5aa0" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Personalized Plan</h3>
+                            <p>Customized tutoring strategy tailored to your learning style</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 17L12 22L22 17" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 12L12 17L22 12" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Expert Guidance</h3>
+                            <p>Meet our experienced tutors and discuss your specific challenges</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7293C21.7209 20.9845 21.5573 21.2136 21.3521 21.4019C21.1468 21.5901 20.9046 21.7335 20.6407 21.8227C20.3769 21.9119 20.0974 21.9451 19.82 21.92C16.7428 21.5856 13.787 20.5341 11.19 18.85C8.77382 17.3147 6.72533 15.2662 5.18999 12.85C3.49997 10.2412 2.44824 7.27099 2.11999 4.18C2.095 3.90347 2.12787 3.62476 2.21649 3.36162C2.30512 3.09849 2.44756 2.85669 2.63476 2.65162C2.82196 2.44655 3.0498 2.28271 3.30379 2.17052C3.55777 2.05833 3.83233 2.00026 4.10999 2H7.10999C7.59531 1.99522 8.06679 2.16708 8.43376 2.48353C8.80073 2.79999 9.03994 3.23945 9.10999 3.72C9.23662 4.68007 9.47144 5.62273 9.80999 6.53C9.94454 6.88792 9.97366 7.27691 9.89391 7.65088C9.81415 8.02485 9.62886 8.36811 9.35999 8.64L8.08999 9.91C9.51355 12.4135 11.5865 14.4864 14.09 15.91L15.36 14.64C15.6319 14.3711 15.9751 14.1858 16.3491 14.1061C16.7231 14.0263 17.1121 14.0555 17.47 14.19C18.3773 14.5286 19.3199 14.7634 20.28 14.89C20.7658 14.9585 21.2094 15.2032 21.5265 15.5775C21.8437 15.9518 22.0122 16.4296 22 16.92Z" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+1 (347) 545-7753</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <polyline points="22,6 12,13 2,6" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>alpvargelci@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consultation Form Card -->
+                <div class="contact-form-card">
+                    <h2 style="color: #1e3a5f; margin-bottom: 30px; font-size: 1.8rem;">Schedule Your Consultation</h2>
+                    <form class="contact-form-new" name="consultation" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <!-- Honeypot field for spam protection -->
+                        <input type="hidden" name="bot-field" />
+                        
+                        <div class="form-group-new">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+
+                        <div class="form-group-new">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+
+                        <div class="form-group-new">
+                            <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+                        </div>
+
+                        <div class="form-group-new">
+                            <select id="student-level" name="student-level" required>
+                                <option value="">Student Level</option>
+                                <option value="Elementary School">Elementary School</option>
+                                <option value="Middle School">Middle School</option>
+                                <option value="High School">High School</option>
+                                <option value="College">College</option>
+                                <option value="Adult Learner">Adult Learner</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-new">
+                            <select id="service-interest" name="service-interest" required>
+                                <option value="">Service of Interest</option>
+                                <option value="SAT/ACT">SAT/ACT</option>
+                                <option value="Approved College Consultant">Approved College Consultant</option>
+                                <option value="Advanced Mathematics">Advanced Mathematics</option>
+                                <option value="AP Physics">AP Physics</option>
+                                <option value="AP Chemistry">AP Chemistry</option>
+                                <option value="AP Biology">AP Biology</option>
+                                <option value="AP Statistics">AP Statistics</option>
+                                <option value="AP English">AP English</option>
+                                <option value="AP Language">AP Language</option>
+                                <option value="AP History & Humanities">AP History & Humanities</option>
+                                <option value="Preparatory Tutelage">Preparatory Tutelage</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-new">
+                            <select id="preferred-time" name="preferred-time" required>
+                                <option value="">Preferred Consultation Time</option>
+                                <option value="Morning (9AM-12PM)">Morning (9AM-12PM)</option>
+                                <option value="Afternoon (12PM-5PM)">Afternoon (12PM-5PM)</option>
+                                <option value="Evening (5PM-8PM)">Evening (5PM-8PM)</option>
+                                <option value="Weekend">Weekend</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-new">
+                            <textarea id="goals" name="goals" rows="4" placeholder="Tell us about your academic goals and any specific challenges you're facing" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-button-new">Schedule Consultation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+                </div>
+                <p class="footer-text">&copy; 2025 Hermes Tutoring. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Popup -->
+    <div class="cart-popup" id="cartPopup">
+        <div class="cart-popup-content">
+            <div class="cart-popup-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-cart" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="cart-total" id="cartTotal">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price">$0</span>
+                </div>
+            </div>
+            <div class="cart-actions">
+                <button class="checkout-btn" id="checkoutBtn">Checkout with Stripe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buy Now Popup -->
+    <div class="buy-now-popup" id="buyNowPopup">
+        <div class="buy-now-popup-content">
+            <div class="buy-now-popup-header">
+                <h3>Complete Purchase</h3>
+                <button class="close-buy-now" id="closeBuyNow">&times;</button>
+            </div>
+            <div class="buy-now-item" id="buyNowItem">
+                <!-- Item details will be populated here -->
+            </div>
+            <div class="buy-now-total" id="buyNowTotal">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price">$0</span>
+                </div>
+            </div>
+            <div class="buy-now-actions">
+                <button class="complete-purchase-btn" id="completePurchaseBtn">Buy Now with Stripe</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
