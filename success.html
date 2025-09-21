@@ -50,6 +50,16 @@
                 <h1>Payment Successful!</h1>
                 <p class="success-message">Thank you for your purchase! Your payment has been processed successfully.</p>
                 
+                <div class="purchase-summary" id="purchaseSummary">
+                    <h3>Order Summary</h3>
+                    <div class="summary-items" id="summaryItems">
+                        <!-- Purchase details will be populated here -->
+                    </div>
+                    <div class="summary-total" id="summaryTotal">
+                        <!-- Total will be populated here -->
+                    </div>
+                </div>
+                
                 <div class="next-steps">
                     <h3>What's Next?</h3>
                     <ul>
@@ -74,7 +84,7 @@
                 <div class="footer-logo">
                     <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
                 </div>
-                <p class="footer-text">&copy; 2025 Hermes Tutoring. All rights reserved.</p>
+                <p class="footer-text">&copy; 2025 Hermes Tutoring LLC. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -138,5 +148,62 @@
         }
     </script>
     <script src="script.js"></script>
+    <script>
+        // Success page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get purchase data from localStorage (saved before checkout)
+            const purchaseData = JSON.parse(localStorage.getItem('hermesPurchaseData')) || null;
+            const summaryItems = document.getElementById('summaryItems');
+            const summaryTotal = document.getElementById('summaryTotal');
+            
+            if (purchaseData && summaryItems && summaryTotal) {
+                displayPurchaseSummary(purchaseData);
+            }
+            
+            // Clear cart and purchase data after successful payment
+            localStorage.removeItem('hermesCart');
+            localStorage.removeItem('hermesCartCount');
+            localStorage.removeItem('hermesPurchaseData');
+            
+            // Update cart count display if elements exist
+            const cartCountElement = document.getElementById('cartCount');
+            if (cartCountElement) {
+                cartCountElement.textContent = '0';
+            }
+            
+            console.log('Cart cleared after successful payment');
+        });
+        
+        function displayPurchaseSummary(purchaseData) {
+            const summaryItems = document.getElementById('summaryItems');
+            const summaryTotal = document.getElementById('summaryTotal');
+            
+            let summaryHTML = '';
+            let total = 0;
+            
+            purchaseData.items.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                summaryHTML += `
+                    <div class="summary-item">
+                        <div class="item-info">
+                            <div class="item-name">${item.name}</div>
+                            <div class="item-details">Quantity: ${item.quantity}</div>
+                        </div>
+                        <div class="item-price">$${itemTotal.toFixed(2)}</div>
+                    </div>
+                `;
+            });
+            
+            summaryItems.innerHTML = summaryHTML;
+            summaryTotal.innerHTML = `
+                <div class="total-row">
+                    <span>Total Paid:</span>
+                    <span class="total-amount">$${total.toFixed(2)}</span>
+                </div>
+            `;
+        }
+    </script>
 </body>
 </html>

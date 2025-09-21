@@ -302,6 +302,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function createStripeCheckoutSession(lineItems) {
         try {
+            // Save purchase data to localStorage before checkout
+            const purchaseData = {
+                items: lineItems.map(item => ({
+                    name: item.price_data.product_data.name,
+                    price: item.price_data.unit_amount / 100, // Convert from cents
+                    quantity: item.quantity
+                })),
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('hermesPurchaseData', JSON.stringify(purchaseData));
+            console.log('Saved purchase data:', purchaseData);
+            
             // Determine the API URL based on environment
             const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
             const apiUrl = isLocal 
