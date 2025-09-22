@@ -111,6 +111,19 @@
         </div>
     </section>
 
+    <!-- Hidden Order Confirmation Form for Netlify -->
+    <form name="order-confirmation" netlify netlify-honeypot="bot-field" hidden>
+        <input type="email" name="customer-email" />
+        <input type="text" name="customer-name" />
+        <input type="text" name="order-id" />
+        <input type="text" name="order-total" />
+        <input type="text" name="order-items" />
+        <input type="text" name="order-date" />
+        <input type="text" name="subject" />
+        <textarea name="message"></textarea>
+        <input type="text" name="bot-field" />
+    </form>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">

@@ -1,37 +1,89 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 async function sendConfirmationEmail(session) {
-  // Simple email using Netlify Forms for now
-  // In production, you'd use a service like SendGrid, Mailgun, or AWS SES
+  const customerEmail = session.customer_details?.email;
   
+  if (!customerEmail) {
+    console.log('No customer email found, skipping email send');
+    return;
+  }
+
+  // Get line items from the session
+  const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+  
+  let orderDetails = '';
+  if (lineItems.data && lineItems.data.length > 0) {
+    orderDetails = lineItems.data.map(item => 
+      `<li>${item.description} - Quantity: ${item.quantity} - $${(item.amount_total / 100).toFixed(2)}</li>`
+    ).join('');
+  }
+
   const emailData = {
-    to: session.customer_details?.email || 'customer@example.com',
+    to: customerEmail,
     subject: 'Payment Confirmation - Hermes Tutoring LLC',
     html: `
-      <h2>Thank you for your purchase!</h2>
-      <p>Your payment has been processed successfully.</p>
-      
-      <h3>Order Details:</h3>
-      <p><strong>Session ID:</strong> ${session.id}</p>
-      <p><strong>Amount Paid:</strong> $${(session.amount_total / 100).toFixed(2)}</p>
-      <p><strong>Payment Date:</strong> ${new Date().toLocaleDateString()}</p>
-      
-      <h3>Next Steps:</h3>
-      <ul>
-        <li>Our team will contact you within 24 hours to schedule your first session</li>
-        <li>You will receive access to our student portal</li>
-        <li>If you have any questions, contact us at alpvargelci@gmail.com</li>
-      </ul>
-      
-      <p>Thank you for choosing Hermes Tutoring LLC!</p>
-      <p>Best regards,<br>The Hermes Tutoring Team</p>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #2c5aa0;">Thank you for your purchase!</h2>
+        <p>Your payment has been processed successfully.</p>
+        
+        <h3 style="color: #2c5aa0;">Order Details:</h3>
+        <p><strong>Session ID:</strong> ${session.id}</p>
+        <p><strong>Amount Paid:</strong> $${(session.amount_total / 100).toFixed(2)}</p>
+        <p><strong>Payment Date:</strong> ${new Date().toLocaleDateString()}</p>
+        
+        ${orderDetails ? `<h4>Items Purchased:</h4><ul>${orderDetails}</ul>` : ''}
+        
+        <h3 style="color: #2c5aa0;">Next Steps:</h3>
+        <ul>
+          <li>Our team will contact you within 24 hours to schedule your first session</li>
+          <li>You will receive access to our student portal</li>
+          <li>If you have any questions, contact us at alpvargelci@gmail.com</li>
+        </ul>
+        
+        <p>Thank you for choosing Hermes Tutoring LLC!</p>
+        <p>Best regards,<br>The Hermes Tutoring Team</p>
+      </div>
     `
   };
   
-  console.log('Email would be sent to:', emailData.to);
-  console.log('Email content prepared for session:', session.id);
+  console.log('Email prepared for:', emailData.to);
+  console.log('Order details:', orderDetails);
   
-  // For now, just log the email. In production, integrate with your email service
+  // Send order confirmation using Netlify Forms (same system as contact form)
+  try {
+    const orderDetails = {
+      sessionId: session.id,
+      amount: session.amount_total / 100,
+      currency: session.currency,
+      customerEmail: session.customer_details?.email,
+      lineItems: lineItems.data || []
+    };
+
+    const response = await fetch(`${process.env.URL || 'https://hermestutoring.netlify.app'}/.netlify/functions/send-order-confirmation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        to: session.customer_details?.email,
+        subject: 'Order Confirmation - Hermes Tutoring LLC',
+        customerName: session.customer_details?.name || 'Valued Customer',
+        orderDetails: orderDetails
+      }),
+    });
+    
+    const result = await response.json();
+    console.log('Order confirmation response:', result);
+    
+    if (result.success) {
+      console.log('Order confirmation sent successfully via Netlify Forms');
+    } else {
+      console.log('Order confirmation failed:', result.message);
+    }
+  } catch (emailError) {
+    console.error('Failed to send order confirmation:', emailError);
+  }
+  
   return Promise.resolve();
 }
 

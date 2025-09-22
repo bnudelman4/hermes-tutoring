@@ -62,7 +62,7 @@
                 <div class="purchase-summary" id="purchaseSummary">
                     <h3>Order Summary</h3>
                     <div class="summary-items" id="summaryItems">
-                        <!-- Purchase details will be populated here -->
+                        <p class="loading-message">Loading order details...</p>
                     </div>
                     <div class="summary-total" id="summaryTotal">
                         <!-- Total will be populated here -->
@@ -165,8 +165,13 @@
             const summaryItems = document.getElementById('summaryItems');
             const summaryTotal = document.getElementById('summaryTotal');
             
-            if (purchaseData && summaryItems && summaryTotal) {
+            if (purchaseData && purchaseData.items && purchaseData.items.length > 0) {
                 displayPurchaseSummary(purchaseData);
+            } else {
+                // Show message if no purchase data found
+                if (summaryItems) {
+                    summaryItems.innerHTML = '<p class="no-data-message">Order details not available. Please contact us if you have any questions.</p>';
+                }
             }
             
             // Clear cart and purchase data after successful payment

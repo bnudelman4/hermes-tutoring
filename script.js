@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             console.log('Add to cart clicked');
             const packageId = this.getAttribute('data-package');
-            const price = parseInt(this.getAttribute('data-price'));
+            const price = parseFloat(this.getAttribute('data-price'));
             const name = this.getAttribute('data-name');
             
             console.log('Adding to cart:', packageId, name, price);
@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             console.log('Buy now clicked');
             const packageId = this.getAttribute('data-package');
-            const price = parseInt(this.getAttribute('data-price'));
+            const price = parseFloat(this.getAttribute('data-price'));
             const name = this.getAttribute('data-name');
             
             console.log('Buy now:', packageId, name, price);
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const buyNowItem = document.querySelector('#buyNowItem .item-details');
             if (buyNowItem) {
                 const packageName = buyNowItem.querySelector('h4').textContent;
-                const price = parseInt(buyNowItem.querySelector('.item-price').textContent.replace('$', '').replace(',', ''));
+                const price = parseFloat(buyNowItem.querySelector('.item-price').textContent.replace('$', '').replace(',', ''));
                 
                 const singleItem = [{
                     id: Date.now().toString(),
@@ -411,15 +411,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showBuyNowPopup(packageId, name, price) {
+        // Format price to ensure it shows decimal places
+        const formattedPrice = price.toFixed(2);
+        
         buyNowItem.innerHTML = `
             <div class="item-details">
                 <h4>${name}</h4>
                 <p>One-time purchase</p>
-                <div class="item-price">$${price}</div>
+                <div class="item-price">$${formattedPrice}</div>
             </div>
         `;
         
-        buyNowTotal.querySelector('.total-price').textContent = `$${price}`;
+        buyNowTotal.querySelector('.total-price').textContent = `$${formattedPrice}`;
         buyNowPopup.classList.add('show');
     }
 
@@ -471,14 +474,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="cart-item">
                     <div class="item-info">
                         <h4>${item.name}</h4>
-                        <p>$${item.price} each</p>
+                        <p>$${item.price.toFixed(2)} each</p>
                     </div>
                     <div class="item-quantity">
                         <button class="quantity-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
                         <span>${item.quantity}</span>
                         <button class="quantity-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
                     </div>
-                    <div class="item-price">$${itemTotal}</div>
+                    <div class="item-price">$${itemTotal.toFixed(2)}</div>
                     <button class="remove-item" onclick="removeFromCart('${item.id}')">Remove</button>
                 </div>
             `;

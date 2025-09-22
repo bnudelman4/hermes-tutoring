@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Email System - Hermes Tutoring</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .test-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .test-form {
+            margin: 20px 0;
+        }
+        .test-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .test-btn {
+            background: #2c5aa0;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .test-btn:hover {
+            background: #1e3a5f;
+        }
+        .result {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Test Email System</h1>
+        <p>Use this page to test if the email confirmation system is working properly.</p>
+        
+        <div class="test-form">
+            <input type="email" id="testEmail" placeholder="Enter email address to test" value="test@example.com">
+            <button class="test-btn" onclick="testEmail()">Send Test Email (Old Method)</button>
+            <button class="test-btn" onclick="testNetlifyForms()" style="background: #28a745; margin-top: 10px;">Test Netlify Forms (New Method)</button>
+        </div>
+        
+        <div id="result"></div>
+        
+        <h3>What this tests:</h3>
+        <ul>
+            <li>✅ Email function is working</li>
+            <li>✅ Email service is configured</li>
+            <li>✅ Emails can be sent successfully</li>
+            <li>✅ Email content is properly formatted</li>
+        </ul>
+        
+        <h3>Setup Required:</h3>
+        <p>If the test fails, you need to set up an email service. Check the <code>EMAIL_SETUP_GUIDE.md</code> file for instructions.</p>
+        
+        <h3>Current Status:</h3>
+        <p id="status">Click "Send Test Email" to check status</p>
+    </div>
+
+    <script>
+        async function testEmail() {
+            const email = document.getElementById('testEmail').value;
+            const resultDiv = document.getElementById('result');
+            const statusDiv = document.getElementById('status');
+            
+            if (!email) {
+                resultDiv.innerHTML = '<div class="error">Please enter an email address</div>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '<div>Testing email system...</div>';
+            statusDiv.textContent = 'Testing...';
+            
+            try {
+                const response = await fetch('/.netlify/functions/test-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ testEmail: email }),
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    if (result.emailSent) {
+                        resultDiv.innerHTML = `
+                            <div class="success">
+                                ✅ Email sent successfully!<br>
+                                Method: ${result.method}<br>
+                                Check your inbox at ${email}
+                            </div>
+                        `;
+                        statusDiv.textContent = '✅ Email system is working!';
+                    } else {
+                        resultDiv.innerHTML = `
+                            <div class="error">
+                                ❌ Email system needs configuration<br>
+                                Details: ${result.details.message || 'Unknown error'}
+                            </div>
+                        `;
+                        statusDiv.textContent = '❌ Email system needs setup';
+                    }
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Test failed: ${result.error}</div>`;
+                    statusDiv.textContent = '❌ Test failed';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+                statusDiv.textContent = '❌ Connection error';
+            }
+        }
+
+        async function testNetlifyForms() {
+            const email = document.getElementById('testEmail').value;
+            const resultDiv = document.getElementById('result');
+            const statusDiv = document.getElementById('status');
+            
+            if (!email) {
+                resultDiv.innerHTML = '<div class="error">Please enter an email address</div>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '<div>Testing Netlify Forms order confirmation...</div>';
+            statusDiv.textContent = 'Testing Netlify Forms...';
+            
+            try {
+                const response = await fetch('/.netlify/functions/test-netlify-forms', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ testEmail: email }),
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    if (result.orderConfirmationSent) {
+                        resultDiv.innerHTML = `
+                            <div class="success">
+                                ✅ Netlify Forms order confirmation sent!<br>
+                                Method: ${result.method}<br>
+                                Check your email at ${email}<br>
+                                <strong>This uses the same system as your contact form!</strong>
+                            </div>
+                        `;
+                        statusDiv.textContent = '✅ Netlify Forms is working!';
+                    } else {
+                        resultDiv.innerHTML = `
+                            <div class="error">
+                                ❌ Netlify Forms needs configuration<br>
+                                Details: ${result.details.message || 'Unknown error'}
+                            </div>
+                        `;
+                        statusDiv.textContent = '❌ Netlify Forms needs setup';
+                    }
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Test failed: ${result.error}</div>`;
+                    statusDiv.textContent = '❌ Test failed';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+                statusDiv.textContent = '❌ Connection error';
+            }
+        }
+    </script>
+</body>
+</html>
