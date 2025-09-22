@@ -65,6 +65,7 @@
             <input type="email" id="testEmail" placeholder="Enter email address to test" value="test@example.com">
             <button class="test-btn" onclick="testEmail()">Send Test Email (Old Method)</button>
             <button class="test-btn" onclick="testNetlifyForms()" style="background: #28a745; margin-top: 10px;">Test Netlify Forms (New Method)</button>
+            <button class="test-btn" onclick="testCustomerEmail()" style="background: #17a2b8; margin-top: 10px;">Test Customer Email (Recommended)</button>
         </div>
         
         <div id="result"></div>
@@ -181,6 +182,61 @@
                             </div>
                         `;
                         statusDiv.textContent = '❌ Netlify Forms needs setup';
+                    }
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Test failed: ${result.error}</div>`;
+                    statusDiv.textContent = '❌ Test failed';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+                statusDiv.textContent = '❌ Connection error';
+            }
+        }
+
+        async function testCustomerEmail() {
+            const email = document.getElementById('testEmail').value;
+            const resultDiv = document.getElementById('result');
+            const statusDiv = document.getElementById('status');
+            
+            if (!email) {
+                resultDiv.innerHTML = '<div class="error">Please enter an email address</div>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '<div>Testing customer email system...</div>';
+            statusDiv.textContent = 'Testing customer email...';
+            
+            try {
+                const response = await fetch('/.netlify/functions/test-customer-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ testEmail: email }),
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    if (result.emailSent) {
+                        resultDiv.innerHTML = `
+                            <div class="success">
+                                ✅ Customer email sent successfully!<br>
+                                Method: ${result.method}<br>
+                                Check your email at ${email}<br>
+                                <strong>This is the actual email customers will receive!</strong>
+                            </div>
+                        `;
+                        statusDiv.textContent = '✅ Customer email system is working!';
+                    } else {
+                        resultDiv.innerHTML = `
+                            <div class="error">
+                                ❌ Customer email system needs configuration<br>
+                                Details: ${result.details.message || 'Unknown error'}<br>
+                                <strong>Check Netlify logs for email content to send manually</strong>
+                            </div>
+                        `;
+                        statusDiv.textContent = '❌ Customer email needs setup';
                     }
                 } else {
                     resultDiv.innerHTML = `<div class="error">❌ Test failed: ${result.error}</div>`;

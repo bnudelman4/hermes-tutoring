@@ -49,7 +49,7 @@ async function sendConfirmationEmail(session) {
   console.log('Email prepared for:', emailData.to);
   console.log('Order details:', orderDetails);
   
-  // Send order confirmation using Netlify Forms (same system as contact form)
+  // Send order confirmation email to customer
   try {
     const orderDetails = {
       sessionId: session.id,
@@ -59,29 +59,28 @@ async function sendConfirmationEmail(session) {
       lineItems: lineItems.data || []
     };
 
-    const response = await fetch(`${process.env.URL || 'https://hermestutoring.netlify.app'}/.netlify/functions/send-order-confirmation`, {
+    const response = await fetch(`${process.env.URL || 'https://hermestutoring.netlify.app'}/.netlify/functions/send-customer-email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         to: session.customer_details?.email,
-        subject: 'Order Confirmation - Hermes Tutoring LLC',
         customerName: session.customer_details?.name || 'Valued Customer',
         orderDetails: orderDetails
       }),
     });
     
     const result = await response.json();
-    console.log('Order confirmation response:', result);
+    console.log('Customer email response:', result);
     
     if (result.success) {
-      console.log('Order confirmation sent successfully via Netlify Forms');
+      console.log('Customer email sent successfully via:', result.method);
     } else {
-      console.log('Order confirmation failed:', result.message);
+      console.log('Customer email failed:', result.message);
     }
   } catch (emailError) {
-    console.error('Failed to send order confirmation:', emailError);
+    console.error('Failed to send customer email:', emailError);
   }
   
   return Promise.resolve();
