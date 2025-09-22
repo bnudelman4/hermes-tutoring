@@ -21,8 +21,8 @@ app.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items: items,
       mode: 'payment',
-      success_url: `http://localhost:8000/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `http://localhost:8000/services.html`,
+      success_url: `http://localhost:8080/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `http://localhost:8080/services.html`,
       metadata: {
         order_type: 'tutoring_package',
       },

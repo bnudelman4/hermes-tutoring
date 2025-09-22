@@ -18,13 +18,22 @@
                     <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
                 </a>
             </div>
-            <nav class="nav">
+            <!-- Mobile hamburger menu button -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <nav class="nav" id="mainNav">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="services.html" class="nav-link">Services</a>
                 <a href="about.html" class="nav-link">About Us</a>
                 <a href="testimonials.html" class="nav-link">Testimonials</a>
                 <a href="contact.html" class="nav-link active">Contact Us</a>
-                <div class="cart-icon" id="cartIcon">
+            </nav>
+            
+            <div class="cart-icon" id="cartIcon">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <!-- Cart body -->
                         <path d="M6 8H28L26 20H8L6 8Z" fill="#2c5aa0" stroke="#2c5aa0" stroke-width="1.5"/>

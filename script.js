@@ -539,6 +539,50 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 2000);
     }
 
+    // Mobile menu toggle functionality
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mainNav = document.getElementById('mainNav');
+    
+    console.log('Mobile menu elements:', { 
+        toggle: mobileMenuToggle ? 'found' : 'not found',
+        nav: mainNav ? 'found' : 'not found'
+    });
+    
+    // Reset mobile menu state on page load
+    if (mobileMenuToggle) {
+        mobileMenuToggle.classList.remove('active');
+    }
+    if (mainNav) {
+        mainNav.classList.remove('mobile-open');
+    }
+    
+    if (mobileMenuToggle && mainNav) {
+        mobileMenuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Hamburger menu clicked');
+            this.classList.toggle('active');
+            mainNav.classList.toggle('mobile-open');
+        });
+        
+        // Close mobile menu when clicking on a nav link
+        const navLinks = mainNav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuToggle.classList.remove('active');
+                mainNav.classList.remove('mobile-open');
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuToggle.contains(e.target) && !mainNav.contains(e.target)) {
+                mobileMenuToggle.classList.remove('active');
+                mainNav.classList.remove('mobile-open');
+            }
+        });
+    }
+
     // Make functions globally available for onclick handlers
     window.updateQuantity = updateQuantity;
     window.removeFromCart = removeFromCart;
