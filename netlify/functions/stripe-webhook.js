@@ -49,7 +49,7 @@ async function sendConfirmationEmail(session) {
   console.log('Email prepared for:', emailData.to);
   console.log('Order details:', orderDetails);
   
-  // Send order confirmation email to customer
+  // Send order confirmation to site owner (you) via Netlify Forms
   try {
     const orderDetails = {
       sessionId: session.id,
@@ -59,7 +59,42 @@ async function sendConfirmationEmail(session) {
       lineItems: lineItems.data || []
     };
 
-    const response = await fetch(`${process.env.URL || 'https://hermestutoring.netlify.app'}/.netlify/functions/send-customer-email`, {
+    const response = await fetch(`${process.env.URL || 'https://hermestutoring.netlify.app'}/.netlify/functions/send-order-confirmation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        to: session.customer_details?.email,
+        subject: 'Order Confirmation - Hermes Tutoring LLC',
+        customerName: session.customer_details?.name || 'Valued Customer',
+        orderDetails: orderDetails
+      }),
+    });
+    
+    const result = await response.json();
+    console.log('Order confirmation response:', result);
+    
+    if (result.success) {
+      console.log('Order confirmation sent to site owner via Netlify Forms');
+    } else {
+      console.log('Order confirmation failed:', result.message);
+    }
+  } catch (emailError) {
+    console.error('Failed to send order confirmation:', emailError);
+  }
+
+  // Also send customer email (optional - for customer confirmation)
+  try {
+    const orderDetails = {
+      sessionId: session.id,
+      amount: session.amount_total / 100,
+      currency: session.currency,
+      customerEmail: session.customer_details?.email,
+      lineItems: lineItems.data || []
+    };
+
+    const customerResponse = await fetch(`${process.env.URL || 'https://hermestutoring.netlify.app'}/.netlify/functions/send-customer-email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -71,16 +106,16 @@ async function sendConfirmationEmail(session) {
       }),
     });
     
-    const result = await response.json();
-    console.log('Customer email response:', result);
+    const customerResult = await customerResponse.json();
+    console.log('Customer email response:', customerResult);
     
-    if (result.success) {
-      console.log('Customer email sent successfully via:', result.method);
+    if (customerResult.success) {
+      console.log('Customer email sent successfully via:', customerResult.method);
     } else {
-      console.log('Customer email failed:', result.message);
+      console.log('Customer email failed:', customerResult.message);
     }
-  } catch (emailError) {
-    console.error('Failed to send customer email:', emailError);
+  } catch (customerEmailError) {
+    console.error('Failed to send customer email:', customerEmailError);
   }
   
   return Promise.resolve();
