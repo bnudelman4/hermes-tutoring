@@ -1,5 +1,5 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Russo+One&family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Russo+One&family=Anton&display=swap');
 
 /* Reset and Base Styles */
 * {
@@ -9,7 +9,7 @@
 }
 
 body {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     line-height: 1.4;
     color: #333;
     background-color: #fff;
@@ -24,7 +24,7 @@ body {
 
 /* Global Heading Styles */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -107,7 +107,7 @@ h3 {
     font-weight: 400;
     transition: color 0.3s ease;
     position: relative;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 1.1rem;
@@ -198,7 +198,7 @@ h3 {
     font-size: 1.2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -767,7 +767,7 @@ h3 {
     text-align: center;
     cursor: pointer;
     font-size: 1.1rem;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -789,7 +789,7 @@ h3 {
     text-align: center;
     cursor: pointer;
     font-size: 1.1rem;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -1464,7 +1464,7 @@ h3 {
     font-size: 1rem;
     transition: border-color 0.3s ease;
     background: white;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -1492,7 +1492,7 @@ h3 {
     cursor: pointer;
     transition: transform 0.3s ease;
     width: 100%;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -1592,7 +1592,7 @@ h3 {
     font-size: 3rem;
     color: #28a745;
     margin-bottom: 20px;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -1617,7 +1617,7 @@ h3 {
     color: #2c5aa0;
     margin-bottom: 20px;
     text-align: center;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -1659,7 +1659,7 @@ h3 {
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s ease;
@@ -1700,7 +1700,7 @@ h3 {
     font-size: 2.8rem;
     font-weight: 400;
     margin-bottom: 20px;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 3px;
 }
@@ -1726,7 +1726,7 @@ h3 {
     font-weight: 400;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -1832,7 +1832,7 @@ h3 {
         color: #2c5aa0;
         text-decoration: none;
         font-weight: 600;
-        font-family: 'Bebas Neue', sans-serif;
+        font-family: 'Oswald', sans-serif;
         text-transform: uppercase;
         letter-spacing: 1px;
         transition: all 0.3s ease;
