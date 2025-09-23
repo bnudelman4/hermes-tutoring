@@ -279,7 +279,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function initiateStripeCheckout(items) {
         // Calculate total
-        const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const total = items.reduce((sum, item) => {
+            const itemTotal = Math.round((item.price * item.quantity) * 100) / 100;
+            return Math.round((sum + itemTotal) * 100) / 100;
+        }, 0);
         
         // Create line items for Stripe
         const lineItems = items.map(item => ({
@@ -467,8 +470,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let total = 0;
 
         cart.forEach(item => {
-            const itemTotal = item.price * item.quantity;
-            total += itemTotal;
+            const itemTotal = Math.round((item.price * item.quantity) * 100) / 100;
+            total = Math.round((total + itemTotal) * 100) / 100;
             
             cartHTML += `
                 <div class="cart-item">
@@ -488,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         cartItems.innerHTML = cartHTML;
-        cartTotal.querySelector('.total-price').textContent = `$${total}`;
+        cartTotal.querySelector('.total-price').textContent = `$${total.toFixed(2)}`;
     }
 
     function updateQuantity(packageId, change) {
