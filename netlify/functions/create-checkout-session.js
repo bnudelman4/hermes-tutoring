@@ -44,6 +44,8 @@ exports.handler = async (event, context) => {
       mode: 'payment',
       success_url: 'https://hermestutoring.netlify.app/success.html',
       cancel_url: 'https://hermestutoring.netlify.app/services.html',
+      allow_promotion_codes: true, // Enable coupon codes
+      billing_address_collection: 'required', // Optional: require billing address
     });
 
     return {

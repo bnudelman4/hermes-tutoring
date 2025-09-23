@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Stripe configuration
-    const STRIPE_PUBLISHABLE_KEY = 'pk_live_51S98k6DeNDEl0L4PlVBeDcHIhLFhW3Q4nLOnCCYVaNO6e3J5ZRn9yRXDSbd5NSURiDeZJY7d783PK7oTlGssibx800AWTmgtM3'; // Stripe publishable key
+    const STRIPE_PUBLISHABLE_KEY = 'pk_live_51S98k6DeNDEl0L4PlVBeDcHIhLFhW3Q4nLOnCCYVaNO6e3J5ZRn9yRXDSbd5NSURiDeZJY7d783PK7oTlGssibx800AWTmgtM3'; // Live Stripe publishable key
     let stripe;
     
     // Initialize Stripe when available
