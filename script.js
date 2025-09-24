@@ -548,10 +548,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle functionality
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mainNav = document.getElementById('mainNav');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
     
     console.log('Mobile menu elements:', { 
         toggle: mobileMenuToggle ? 'found' : 'not found',
-        nav: mainNav ? 'found' : 'not found'
+        nav: mainNav ? 'found' : 'not found',
+        close: mobileMenuClose ? 'found' : 'not found'
     });
     
     // Reset mobile menu state on page load
@@ -571,6 +573,17 @@ document.addEventListener('DOMContentLoaded', function() {
             mainNav.classList.toggle('mobile-open');
         });
         
+        // Close button functionality
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Close button clicked');
+                mobileMenuToggle.classList.remove('active');
+                mainNav.classList.remove('mobile-open');
+            });
+        }
+        
         // Close mobile menu when clicking on a nav link
         const navLinks = mainNav.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
@@ -582,7 +595,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Close mobile menu when clicking outside
         document.addEventListener('click', function(e) {
-            if (!mobileMenuToggle.contains(e.target) && !mainNav.contains(e.target)) {
+            if (!mobileMenuToggle.contains(e.target) && !mainNav.contains(e.target) && !mobileMenuClose.contains(e.target)) {
                 mobileMenuToggle.classList.remove('active');
                 mainNav.classList.remove('mobile-open');
             }

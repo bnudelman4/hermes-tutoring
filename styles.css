@@ -1,6 +1,11 @@
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Russo+One&family=Anton&display=swap');
 
+/* Default: hidden everywhere */
+.mobile-menu-close {
+    display: none;
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -1799,8 +1804,10 @@ h3 {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 15px 20px;
+        padding: 15px 15px;
         position: relative;
+        max-width: 100%;
+        overflow: hidden;
     }
     
     .logo {
@@ -1813,74 +1820,157 @@ h3 {
     
     .mobile-menu-toggle {
         display: flex;
+        flex-direction: column;
+        justify-content: space-around;
         position: absolute;
-        right: 70px;
+        right: 60px;
         top: 50%;
         transform: translateY(-50%);
         z-index: 1001;
+        width: 25px;
+        height: 20px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+    
+    .hamburger-line {
+        width: 100%;
+        height: 3px;
+        background-color: #2c5aa0;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
     }
     
     .nav {
         display: none;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: 250px;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
         background: #ffffff;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         gap: 0;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        border-radius: 12px;
         z-index: 1000;
-        margin-top: 10px;
-        border: 1px solid #e9ecef;
+        transition: right 0.3s ease-in-out;
+        padding: 0;
     }
     
     .nav.mobile-open {
         display: flex;
+        right: 0;
     }
     
     .nav-link {
-        font-size: 1.1rem;
-        padding: 20px 25px;
-        border-bottom: 1px solid #e9ecef;
-        text-align: left;
+        font-size: 2rem;
+        padding: 25px 40px;
+        text-align: center;
         display: block;
-        color: #333;
+        color: #2c5aa0;
         text-decoration: none;
-        font-weight: 500;
+        font-weight: 600;
         font-family: 'Oswald', sans-serif;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
         transition: all 0.3s ease;
+        background: transparent;
+        margin: 10px 0;
+        border-radius: 0;
+        border: none;
+        position: relative;
     }
     
     .nav-link:hover {
-        background-color: #2c5aa0;
-        color: white;
-        transform: translateX(5px);
+        color: #ff6b35;
+        transform: scale(1.05);
     }
     
     .nav-link.active {
-        background-color: #2c5aa0;
-        color: white;
-        font-weight: 600;
+        color: #ff6b35;
+        font-weight: 700;
+    }
+    
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: #ff6b35;
+        border-radius: 2px;
     }
     
     .nav-link:last-child {
-        border-bottom: none;
-        border-radius: 0 0 12px 12px;
+        margin-bottom: 0;
     }
     
     .nav-link:first-child {
-        border-radius: 12px 12px 0 0;
+        margin-top: 0;
+    }
+    
+    /* Show only when nav is open on mobile */
+    @media (max-width: 768px) {
+        .nav.mobile-open .mobile-menu-close {
+            display: block;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: #000; /* Dark color for visibility on white background */
+            cursor: pointer;
+            z-index: 2000; /* Ensure it's above the menu */
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    
+    /* Hide hamburger when menu is open */
+    .mobile-menu-toggle.active {
+        display: none;
+    }
+    
+    .mobile-menu-close:hover {
+        color: #ff6b35;
+        transform: scale(1.1);
     }
     
     .cart-icon {
         margin-left: 0;
         flex-shrink: 0;
-        position: relative;
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
         z-index: 1001;
+    }
+    
+    /* Hide cart icon when mobile menu is open - cart is outside nav */
+    .nav.mobile-open ~ .cart-icon {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
     }
     
     .hero-title {
@@ -1902,14 +1992,33 @@ h3 {
     }
     
     .testimonials-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-        padding: 0 20px;
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 0 15px;
+        max-width: 100%;
     }
     
     .testimonial-card {
         min-width: unset;
-        padding: 25px;
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 350px;
+    }
+    
+    /* Testimonials hero mobile */
+    .testimonials-hero-new {
+        padding: 80px 20px 60px;
+        min-height: 300px;
+    }
+    
+    .testimonials-hero-new h1 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .testimonials-hero-new p {
+        font-size: 1.1rem;
+        line-height: 1.5;
     }
     
     /* Contact page mobile responsiveness */
@@ -2227,12 +2336,13 @@ h3 {
 .submit-testimonial-content {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
+    justify-content: center !important;
+    flex-direction: column !important;
     max-width: 1400px;
     margin: 0 auto;
-    gap: 80px;
+    gap: 40px;
     min-height: 200px;
-    flex-direction: row !important;
+    text-align: center !important;
 }
 
 
@@ -2341,27 +2451,61 @@ h3 {
     
     /* Submit Testimonial Mobile */
     .submit-testimonial-section {
-        padding: 60px 20px;
+        padding: 40px 15px;
     }
     
     .submit-testimonial-content {
-        flex-direction: column;
+        flex-direction: column !important;
         text-align: center;
-        gap: 30px;
+        gap: 25px;
+        max-width: 100%;
+    }
+    
+    .testimonial-text-section {
+        order: 1;
+        margin-bottom: 20px;
+    }
+    
+    .testimonial-button-section {
+        order: 2;
     }
     
     .testimonial-text-section h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
     }
     
     .testimonial-text-section p {
-        font-size: 1.1rem;
+        font-size: 1rem;
         margin-bottom: 0;
+        line-height: 1.4;
     }
     
     .submit-testimonial-btn {
-        padding: 15px 30px;
-        font-size: 1.1rem;
+        padding: 15px 30px !important;
+        font-size: 1rem !important;
+        white-space: nowrap;
+        max-width: 280px;
+        margin: 0 auto;
+        display: block;
+        background: #ff6b35 !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 50px !important;
+        font-weight: 400 !important;
+        font-family: 'Oswald', sans-serif !important;
+        text-transform: uppercase !important;
+        letter-spacing: 2px !important;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3) !important;
+        text-decoration: none !important;
+    }
+    
+    .submit-testimonial-btn:hover {
+        background: #e55a2e !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4) !important;
     }
     
     /* New services mobile responsiveness */
