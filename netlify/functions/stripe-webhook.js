@@ -37,7 +37,7 @@ async function sendConfirmationEmail(session) {
         <ul>
           <li>Our team will contact you within 24 hours to schedule your first session</li>
           <li>You will receive access to our student portal</li>
-          <li>If you have any questions, contact us at alpvargelci@gmail.com</li>
+          <li>If you have any questions, contact us at contact@hermestutoring.com</li>
         </ul>
         
         <p>Thank you for choosing Hermes Tutoring LLC!</p>

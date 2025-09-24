@@ -104,7 +104,7 @@ exports.handler = async (event, context) => {
               <ul>
                 <li>Our team will contact you within 24 hours to schedule your first session</li>
                 <li>You will receive access to our student portal</li>
-                <li>If you have any questions, contact us at alpvargelci@gmail.com</li>
+                <li>If you have any questions, contact us at contact@hermestutoring.com</li>
               </ul>
             </div>
 
@@ -112,7 +112,7 @@ exports.handler = async (event, context) => {
             
             <div class="footer">
               <p>Best regards,<br>The Hermes Tutoring Team</p>
-              <p>Email: alpvargelci@gmail.com | Phone: +1 (347) 545-7753</p>
+              <p>Email: contact@hermestutoring.com | Phone: +1 (347) 545-7753, +1 (646) 477-1086</p>
             </div>
           </div>
         </div>
@@ -137,7 +137,7 @@ exports.handler = async (event, context) => {
             to: to,
             subject: 'Order Confirmation - Hermes Tutoring LLC',
             html: emailHTML,
-            from: 'Hermes Tutoring LLC <alpvargelci@gmail.com>',
+            from: 'Hermes Tutoring LLC <contact@hermestutoring.com>',
             orderDetails: orderDetails,
             timestamp: new Date().toISOString()
           }),
@@ -169,7 +169,7 @@ exports.handler = async (event, context) => {
     console.log('=== CUSTOMER EMAIL TO SEND ===');
     console.log('To:', to);
     console.log('Subject: Order Confirmation - Hermes Tutoring LLC');
-    console.log('From: Hermes Tutoring LLC <alpvargelci@gmail.com>');
+    console.log('From: Hermes Tutoring LLC <contact@hermestutoring.com>');
     console.log('HTML Content:');
     console.log(emailHTML);
     console.log('==============================');

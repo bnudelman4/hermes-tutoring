@@ -52,7 +52,7 @@ exports.handler = async (event, context) => {
         message: html,
         order_details: orderDetails ? JSON.stringify(orderDetails) : '',
         from_name: 'Hermes Tutoring LLC',
-        reply_to: 'alpvargelci@gmail.com'
+        reply_to: 'contact@hermestutoring.com'
       }
     };
 
@@ -100,7 +100,7 @@ exports.handler = async (event, context) => {
             html: html,
             orderDetails: orderDetails,
             timestamp: new Date().toISOString(),
-            from: 'Hermes Tutoring LLC <alpvargelci@gmail.com>'
+            from: 'Hermes Tutoring LLC <contact@hermestutoring.com>'
           }),
         });
         
@@ -125,7 +125,7 @@ exports.handler = async (event, context) => {
     console.log('=== EMAIL TO SEND MANUALLY ===');
     console.log('To:', to);
     console.log('Subject:', subject);
-    console.log('From: Hermes Tutoring LLC <alpvargelci@gmail.com>');
+    console.log('From: Hermes Tutoring LLC <contact@hermestutoring.com>');
     console.log('HTML Content:');
     console.log(html);
     console.log('Order Details:', orderDetails);
