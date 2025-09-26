@@ -549,6 +549,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mainNav = document.getElementById('mainNav');
     const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+    // Discount popup functionality
+    const discountPopup = document.getElementById('discountPopup');
+    const closeDiscount = document.getElementById('closeDiscount');
+    const copyCodeBtn = document.getElementById('copyCodeBtn');
+    const discountCode = document.getElementById('discountCode');
     
     console.log('Mobile menu elements:', { 
         toggle: mobileMenuToggle ? 'found' : 'not found',
@@ -605,6 +611,95 @@ document.addEventListener('DOMContentLoaded', function() {
     // Make functions globally available for onclick handlers
     window.updateQuantity = updateQuantity;
     window.removeFromCart = removeFromCart;
+
+    // Discount popup functionality
+    if (discountPopup && closeDiscount && copyCodeBtn && discountCode) {
+        // Check if this is a hard reload (performance.navigation.type === 1)
+        const isHardReload = performance.navigation && performance.navigation.type === 1;
+        
+        // Reset time tracking and popup state on hard reload
+        if (isHardReload) {
+            localStorage.removeItem('hermesTotalTime');
+            localStorage.removeItem('hermesPopupDismissed');
+        }
+        
+        // Check if popup was already dismissed
+        const popupDismissed = localStorage.getItem('hermesPopupDismissed') === 'true';
+        
+        // Track total time spent on website
+        let totalTimeSpent = parseInt(localStorage.getItem('hermesTotalTime') || '0');
+        let startTime = Date.now();
+        let popupShown = false;
+        
+        // Show popup after 15 seconds total time spent (only if not dismissed)
+        setTimeout(() => {
+            if (!popupShown && !popupDismissed) {
+                discountPopup.classList.add('show');
+                popupShown = true;
+            }
+        }, Math.max(0, 15000 - totalTimeSpent));
+        
+        // Update total time when user leaves the page
+        window.addEventListener('beforeunload', () => {
+            const timeOnPage = Date.now() - startTime;
+            const newTotalTime = totalTimeSpent + timeOnPage;
+            localStorage.setItem('hermesTotalTime', newTotalTime.toString());
+        });
+        
+        // Update total time every 5 seconds while on page
+        const timeTracker = setInterval(() => {
+            const timeOnPage = Date.now() - startTime;
+            const newTotalTime = totalTimeSpent + timeOnPage;
+            localStorage.setItem('hermesTotalTime', newTotalTime.toString());
+        }, 5000);
+
+        // Close popup functionality
+        closeDiscount.addEventListener('click', () => {
+            discountPopup.classList.remove('show');
+            // Mark popup as dismissed so it won't show again
+            localStorage.setItem('hermesPopupDismissed', 'true');
+        });
+
+        // Close popup when clicking outside
+        discountPopup.addEventListener('click', (e) => {
+            if (e.target === discountPopup) {
+                discountPopup.classList.remove('show');
+                // Mark popup as dismissed so it won't show again
+                localStorage.setItem('hermesPopupDismissed', 'true');
+            }
+        });
+
+        // Copy code functionality
+        copyCodeBtn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(discountCode.textContent);
+                copyCodeBtn.textContent = 'Copied!';
+                copyCodeBtn.classList.add('copied');
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    copyCodeBtn.textContent = 'Copy';
+                    copyCodeBtn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = discountCode.textContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                copyCodeBtn.textContent = 'Copied!';
+                copyCodeBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyCodeBtn.textContent = 'Copy';
+                    copyCodeBtn.classList.remove('copied');
+                }, 2000);
+            }
+        });
+    }
 });
 
 // Handle window resize for responsive design

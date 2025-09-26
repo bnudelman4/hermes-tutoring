@@ -3041,3 +3041,226 @@ h3 {
 .checkout-privacy-notice a:hover {
     text-decoration: underline;
 }
+
+/* Discount Popup Styles */
+.discount-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+}
+
+.discount-popup.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.discount-popup-content {
+    background: white;
+    border-radius: 20px;
+    padding: 0;
+    max-width: 450px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.4s ease;
+    position: relative;
+}
+
+.discount-popup-header {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    color: white;
+    padding: 25px 30px;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.discount-popup-header h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.close-discount {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.close-discount:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.discount-popup-body {
+    padding: 30px;
+    text-align: center;
+}
+
+.discount-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c5aa0;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.discount-code-container {
+    background: #f8f9fa;
+    border: 2px dashed #2c5aa0;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 25px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.discount-code {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c5aa0;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    flex: 1;
+    text-align: center;
+}
+
+.copy-code-btn {
+    background: #2c5aa0;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.copy-code-btn:hover {
+    background: #1e3a5f;
+    transform: translateY(-2px);
+}
+
+.copy-code-btn.copied {
+    background: #28a745;
+}
+
+.discount-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 20px 0 30px;
+}
+
+.discount-actions {
+    margin-top: 25px;
+}
+
+.discount-cta-btn {
+    background: linear-gradient(135deg, #2c5aa0, #1e3a5f);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+}
+
+.discount-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
+    text-decoration: none;
+    color: white;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Mobile Responsiveness for Discount Popup */
+@media (max-width: 768px) {
+    .discount-popup-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .discount-popup-header {
+        padding: 20px 25px;
+    }
+    
+    .discount-popup-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .discount-popup-body {
+        padding: 25px 20px;
+    }
+    
+    .discount-title {
+        font-size: 1.2rem;
+    }
+    
+    .discount-code-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .discount-code {
+        font-size: 1.5rem;
+    }
+    
+    .copy-code-btn {
+        width: 100%;
+        padding: 15px;
+    }
+    
+    .discount-cta-btn {
+        width: 100%;
+        padding: 18px;
+        font-size: 1rem;
+    }
+}
