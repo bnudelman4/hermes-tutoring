@@ -3121,8 +3121,18 @@ h3 {
     font-size: 1.4rem;
     font-weight: 600;
     color: #2c5aa0;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     line-height: 1.4;
+}
+
+.discount-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ff6b35;
+    margin-bottom: 25px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .discount-code-container {
@@ -3241,6 +3251,10 @@ h3 {
     
     .discount-title {
         font-size: 1.2rem;
+    }
+    
+    .discount-value {
+        font-size: 1.5rem;
     }
     
     .discount-code-container {

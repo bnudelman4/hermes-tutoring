@@ -240,6 +240,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const packageName = buyNowItem.querySelector('h4').textContent;
                 const price = parseFloat(buyNowItem.querySelector('.item-price').textContent.replace('$', '').replace(',', ''));
                 
+                // Mark that user has made a purchase to prevent popup
+                localStorage.setItem('hermesHasPurchased', 'true');
+                
                 const singleItem = [{
                     id: Date.now().toString(),
                     name: packageName,
@@ -270,6 +273,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Your cart is empty!');
                 return;
             }
+            
+            // Mark that user has made a purchase to prevent popup
+            localStorage.setItem('hermesHasPurchased', 'true');
             
             initiateStripeCheckout(cart);
             cartPopup.classList.remove('show');
@@ -555,6 +561,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeDiscount = document.getElementById('closeDiscount');
     const copyCodeBtn = document.getElementById('copyCodeBtn');
     const discountCode = document.getElementById('discountCode');
+    const viewServicesBtn = document.getElementById('viewServicesBtn');
     
     console.log('Mobile menu elements:', { 
         toggle: mobileMenuToggle ? 'found' : 'not found',
@@ -621,19 +628,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isHardReload) {
             localStorage.removeItem('hermesTotalTime');
             localStorage.removeItem('hermesPopupDismissed');
+            localStorage.removeItem('hermesHasPurchased');
         }
         
-        // Check if popup was already dismissed
+        // Check if popup was already dismissed or if user has made a purchase
         const popupDismissed = localStorage.getItem('hermesPopupDismissed') === 'true';
+        const hasPurchased = localStorage.getItem('hermesHasPurchased') === 'true';
         
         // Track total time spent on website
         let totalTimeSpent = parseInt(localStorage.getItem('hermesTotalTime') || '0');
         let startTime = Date.now();
         let popupShown = false;
         
-        // Show popup after 15 seconds total time spent (only if not dismissed)
+        // Show popup after 15 seconds total time spent (only if not dismissed and no purchase)
         setTimeout(() => {
-            if (!popupShown && !popupDismissed) {
+            if (!popupShown && !popupDismissed && !hasPurchased) {
                 discountPopup.classList.add('show');
                 popupShown = true;
             }
@@ -668,6 +677,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('hermesPopupDismissed', 'true');
             }
         });
+
+        // Close popup when clicking "View Services" button
+        if (viewServicesBtn) {
+            viewServicesBtn.addEventListener('click', () => {
+                discountPopup.classList.remove('show');
+                // Mark popup as dismissed so it won't show again
+                localStorage.setItem('hermesPopupDismissed', 'true');
+            });
+        }
 
         // Copy code functionality
         copyCodeBtn.addEventListener('click', async () => {
