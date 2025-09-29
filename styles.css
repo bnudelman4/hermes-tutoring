@@ -1,5 +1,5 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Russo+One&family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&family=Inter:wght@400&display=swap');
 
 /* Default: hidden everywhere */
 .mobile-menu-close {
@@ -13,8 +13,29 @@
     box-sizing: border-box;
 }
 
+/* Image Optimization */
+img {
+    max-width: 100%;
+    height: auto;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Critical images - load immediately */
+.logo-image {
+    loading: eager;
+}
+
+/* Non-critical images - lazy load */
+.testimonial-avatar,
+.tutor-image,
+.hero-background img {
+    loading: lazy;
+}
+
+/* Global Body Styles */
 body {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Inter', sans-serif;
     line-height: 1.4;
     color: #333;
     background-color: #fff;
@@ -29,10 +50,10 @@ body {
 
 /* Global Heading Styles */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0px;
 }
 
 h1 {
@@ -48,6 +69,22 @@ h2 {
 h3 {
     font-size: 2rem;
     font-weight: 600;
+}
+
+/* Subheading Styles */
+.subheading, .section-subtitle, .hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0px;
+}
+
+/* CTA Button Styles */
+.cta-button, .submit-button-new, .consultation-cta-btn, .add-to-cart-btn, .buy-now-btn, .checkout-btn, .complete-purchase-btn, .discount-cta-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* Header Styles */
@@ -103,7 +140,8 @@ h3 {
     gap: 30px;
     align-items: center;
     height: 60px;
-    margin-left: 20px;
+    justify-content: center;
+    flex: 1;
 }
 
 .nav-link {
@@ -112,9 +150,9 @@ h3 {
     font-weight: 400;
     transition: color 0.3s ease;
     position: relative;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     font-size: 1.1rem;
 }
 
@@ -177,19 +215,29 @@ h3 {
     font-weight: 700;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .hero-subtitle {
     font-size: 2rem;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 20px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .hero-description {
     font-size: 1.2rem;
     margin-bottom: 40px;
     opacity: 0.9;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
 }
 
 .cta-button {
@@ -203,7 +251,7 @@ h3 {
     font-size: 1.2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -215,28 +263,83 @@ h3 {
 
 /* Score Guarantee Section */
 .score-guarantee {
-    padding: 80px 0;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    background: linear-gradient(135deg, #2c5aa0, #1e3a5f);
+    color: white;
+    padding: 100px 0;
+    text-align: center;
 }
 
 .guarantee-content {
     text-align: center;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
 .guarantee-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
-    color: #1e3a5f;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+#studentCounter {
+    display: inline-block;
+    width: 140px;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.score-improvement-highlight {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    margin: 40px auto;
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.improvement-main {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.3;
+    color: white;
+}
+
+.highlight-number {
+    color: #ff6b35;
+    font-size: 2.5rem;
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    display: inline-block;
+}
+
+.improvement-subtitle {
+    font-size: 1.3rem;
+    font-weight: 500;
+    opacity: 0.9;
+    margin-bottom: 0;
+    color: white;
 }
 
 .guarantee-text {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 15px;
-    line-height: 1.8;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto 30px auto;
+    opacity: 0.95;
+    color: white;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 .guarantee-fine-print {
@@ -244,6 +347,27 @@ h3 {
     color: #777;
     font-style: italic;
     line-height: 1.6;
+}
+
+/* Fine Print Section */
+.fine-print-section {
+    background: #f8f9fa;
+    padding: 30px 0;
+    border-top: 1px solid #e9ecef;
+}
+
+.fine-print-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.fine-print-text {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+    font-style: italic;
 }
 
 /* Video Section */
@@ -772,7 +896,7 @@ h3 {
     text-align: center;
     cursor: pointer;
     font-size: 1.1rem;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -794,7 +918,7 @@ h3 {
     text-align: center;
     cursor: pointer;
     font-size: 1.1rem;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -1063,6 +1187,21 @@ h3 {
     color: white;
     padding: 120px 0 80px;
     text-align: center;
+}
+
+.testimonials-hero-new h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.testimonials-hero-new p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
 .about-hero h1 {
@@ -1486,7 +1625,7 @@ h3 {
     font-size: 1rem;
     transition: border-color 0.3s ease;
     background: white;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -1514,7 +1653,7 @@ h3 {
     cursor: pointer;
     transition: transform 0.3s ease;
     width: 100%;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -1614,7 +1753,7 @@ h3 {
     font-size: 3rem;
     color: #28a745;
     margin-bottom: 20px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -1639,7 +1778,7 @@ h3 {
     color: #2c5aa0;
     margin-bottom: 20px;
     text-align: center;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -1681,7 +1820,7 @@ h3 {
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s ease;
@@ -1722,7 +1861,7 @@ h3 {
     font-size: 2.8rem;
     font-weight: 400;
     margin-bottom: 20px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     letter-spacing: 3px;
 }
@@ -1748,7 +1887,7 @@ h3 {
     font-weight: 400;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -1885,7 +2024,7 @@ h3 {
         color: #2c5aa0;
         text-decoration: none;
         font-weight: 600;
-        font-family: 'Oswald', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         text-transform: uppercase;
         letter-spacing: 2px;
         transition: all 0.3s ease;
@@ -2092,6 +2231,41 @@ h3 {
         font-size: 2rem;
     }
     
+    .guarantee-title {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+    
+    .score-improvement-highlight {
+        padding: 25px 20px;
+        margin: 30px auto;
+    }
+    
+    .improvement-main {
+        font-size: 1.6rem;
+    }
+    
+    .highlight-number {
+        font-size: 1.8rem;
+    }
+    
+    .improvement-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .guarantee-text {
+        font-size: 1.1rem;
+    }
+    
+    .fine-print-section {
+        padding: 20px 0;
+    }
+    
+    .fine-print-text {
+        font-size: 0.8rem;
+        padding: 0 20px;
+    }
+    
     /* Contact page mobile responsiveness */
     .contact-hero-new {
         padding: 100px 0 60px;
@@ -2218,7 +2392,7 @@ h3 {
     border: 2px solid #e9ecef;
     border-radius: 10px;
     font-size: 1rem;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     transition: border-color 0.3s ease;
     background: white;
 }
@@ -2300,7 +2474,7 @@ h3 {
     border-radius: 50px !important;
     font-size: 1.3rem !important;
     font-weight: 400 !important;
-    font-family: 'Oswald', sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
     cursor: pointer;
@@ -2428,7 +2602,7 @@ h3 {
     text-decoration: none;
     font-weight: 400;
     font-size: 1.3rem;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -2556,7 +2730,7 @@ h3 {
         border: none !important;
         border-radius: 50px !important;
         font-weight: 400 !important;
-        font-family: 'Oswald', sans-serif !important;
+        font-family: 'Montserrat', sans-serif !important;
         text-transform: uppercase !important;
         letter-spacing: 2px !important;
         cursor: pointer;
@@ -2800,7 +2974,7 @@ h3 {
         text-decoration: none !important;
         font-weight: 400 !important;
         font-size: 1.3rem !important;
-        font-family: 'Oswald', sans-serif !important;
+        font-family: 'Montserrat', sans-serif !important;
         text-transform: uppercase !important;
         letter-spacing: 1px !important;
         transition: transform 0.3s ease, box-shadow 0.3s ease !important;
@@ -3151,7 +3325,7 @@ h3 {
     font-size: 1.8rem;
     font-weight: 700;
     color: #2c5aa0;
-    font-family: 'Courier New', monospace;
+    font-family: 'Montserrat', sans-serif;
     letter-spacing: 2px;
     flex: 1;
     text-align: center;

@@ -551,6 +551,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 2000);
     }
 
+    // Counter animation for student count
+    const studentCounter = document.getElementById('studentCounter');
+    if (studentCounter) {
+        const targetCount = 200;
+        const duration = 2000; // 2 seconds
+        const increment = targetCount / (duration / 16); // 60fps
+        let currentCount = 0;
+        
+        const counterInterval = setInterval(() => {
+            currentCount += increment;
+            if (currentCount >= targetCount) {
+                currentCount = targetCount;
+                clearInterval(counterInterval);
+            }
+            studentCounter.textContent = Math.floor(currentCount) + '+';
+        }, 16);
+    }
+
     // Mobile menu toggle functionality
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mainNav = document.getElementById('mainNav');
@@ -640,13 +658,13 @@ document.addEventListener('DOMContentLoaded', function() {
         let startTime = Date.now();
         let popupShown = false;
         
-        // Show popup after 15 seconds total time spent (only if not dismissed and no purchase)
+        // Show popup after 25 seconds total time spent (only if not dismissed and no purchase)
         setTimeout(() => {
             if (!popupShown && !popupDismissed && !hasPurchased) {
                 discountPopup.classList.add('show');
                 popupShown = true;
             }
-        }, Math.max(0, 15000 - totalTimeSpent));
+        }, Math.max(0, 25000 - totalTimeSpent));
         
         // Update total time when user leaves the page
         window.addEventListener('beforeunload', () => {

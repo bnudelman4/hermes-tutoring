@@ -6,7 +6,12 @@
     <link rel="icon" type="image/x-icon" href="src/favicon.ico">
     <title>Hermes Tutoring - Online College Consulting and Test Prep Experts</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&family=Inter:wght@400&display=swap" rel="stylesheet">
+    <link rel="preload" href="src/logo_nobg.png" as="image">
+    <link rel="preload" href="src/group_pic.JPEG" as="image">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//js.stripe.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
@@ -33,20 +38,6 @@
                 <a href="testimonials.html" class="nav-link">Testimonials</a>
                 <a href="contact.html" class="nav-link">Contact Us</a>
             </nav>
-            
-            <div class="cart-icon" id="cartIcon">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Cart body -->
-                        <path d="M6 8H28L26 20H8L6 8Z" fill="#2c5aa0" stroke="#2c5aa0" stroke-width="1.5"/>
-                        <!-- Cart handle -->
-                        <path d="M6 8L4 4H2" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round"/>
-                        <!-- Cart wheels -->
-                        <circle cx="10" cy="26" r="2" fill="#2c5aa0"/>
-                        <circle cx="24" cy="26" r="2" fill="#2c5aa0"/>
-                    </svg>
-                    <span class="cart-count" id="cartCount">0</span>
-                </div>
-            </nav>
         </div>
     </header>
 
@@ -69,9 +60,12 @@
     <section class="score-guarantee">
         <div class="container">
             <div class="guarantee-content">
-                <h2 class="guarantee-title">Score Improvement Guarantee</h2>
-                <p class="guarantee-text">We guarantee significant score improvements when students follow our proven methods and complete our structured program.</p>
-                <p class="guarantee-fine-print">*Results may vary based on student commitment and practice. While we can't guarantee 100% success, our methods have helped 95%+ of students achieve their target scores.</p>
+                <h2 class="guarantee-title">We've Helped <span id="studentCounter">0+</span> Students Raise Their SAT & ACT Scores by Over 150 Points!</h2>
+                <div class="score-improvement-highlight">
+                    <p class="improvement-main">Guaranteed <span class="highlight-number">100-500 point</span> improvement*</p>
+                    <p class="improvement-subtitle">Significant score increases that get you into your dream college</p>
+                </div>
+                <p class="guarantee-text">Our proven methods and structured programs have helped students achieve remarkable score improvements. Join the hundreds of students who've transformed their test scores with our expert guidance.</p>
             </div>
         </div>
     </section>
@@ -125,12 +119,21 @@
         <input type="text" name="bot-field" />
     </form>
 
+    <!-- Fine Print Section -->
+    <section class="fine-print-section">
+        <div class="container">
+            <div class="fine-print-content">
+                <p class="fine-print-text">*Results may vary based on student commitment and practice. While we can't guarantee 100% success, our methods have helped 95%+ of students achieve their target scores.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image">
+                    <img src="src/logo_nobg.png" alt="Hermes Tutoring" class="logo-image" loading="lazy">
                 </div>
                 <div class="footer-copyright">
                     <p>&copy; 2025 Hermes Tutoring LLC. All rights reserved.</p>
@@ -138,31 +141,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Cart Popup -->
-    <div class="cart-popup" id="cartPopup">
-        <div class="cart-popup-content">
-            <div class="cart-popup-header">
-                <h3>Shopping Cart</h3>
-                <button class="close-cart" id="closeCart">&times;</button>
-            </div>
-            <div class="cart-items" id="cartItems">
-                <p class="empty-cart">Your cart is empty</p>
-            </div>
-            <div class="cart-total" id="cartTotal">
-                <div class="total-row">
-                    <span>Total:</span>
-                    <span class="total-price">$0</span>
-                </div>
-            </div>
-            <div class="cart-actions">
-                <button class="checkout-btn" id="checkoutBtn">Checkout with Stripe</button>
-                <div class="checkout-privacy-notice">
-                    <p>By proceeding, you agree to our <a href="privacy-policy.html">Privacy Policy</a>.</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Buy Now Popup -->
     <div class="buy-now-popup" id="buyNowPopup">
