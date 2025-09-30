@@ -1,0 +1,3 @@
+/wp-admin/*  /  403
+/xmlrpc.php  /  403
+/wp-includes/*  /  403
