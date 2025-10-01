@@ -30,7 +30,7 @@ exports.handler = async (event, context) => {
     const { line_items } = JSON.parse(event.body);
 
     // Get the site URL from the request
-    const siteUrl = process.env.URL || 'https://hermes-tutoring.netlify.app';
+    const siteUrl = process.env.URL || 'https://hermestutoring.com';
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
