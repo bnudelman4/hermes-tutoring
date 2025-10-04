@@ -178,6 +178,104 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCartDisplay();
     }
 
+    // Service type selection popup elements
+    const serviceTypePopup = document.getElementById('serviceTypePopup');
+    const closeServiceType = document.getElementById('closeServiceType');
+    const cancelServiceType = document.getElementById('cancelServiceType');
+    const virtualPrice = document.getElementById('virtualPrice');
+    const inPersonPrice = document.getElementById('inPersonPrice');
+    const virtualBtn = document.querySelector('.virtual-btn');
+    const inPersonBtn = document.querySelector('.in-person-btn');
+
+    // In-person pricing data
+    const inPersonPricing = {
+        'elite': { price: 3499.99, hourly: '$70/hour' },
+        'sat-act-elite': { price: 2919.99, hourly: '$79/hour' },
+        'college-readiness': { price: 1274.99, hourly: '$85/hour' },
+        'standard': { price: 1599.99, hourly: '$80/hour' },
+        'starter': { price: 414.99, hourly: '$83/hour' },
+        'individual': { price: 84.95, hourly: '$84.95/hour' },
+        'college-individual': { price: 104.95, hourly: '$104.95/hour' }
+    };
+
+    // Store pending cart item
+    let pendingCartItem = null;
+
+    // Show service type popup
+    function showServiceTypePopup(packageId, name, virtualPriceValue, action = null) {
+        // Preserve existing action if provided, otherwise create new item
+        if (pendingCartItem && action === null) {
+            // Preserve the existing action from pendingCartItem
+            pendingCartItem = { ...pendingCartItem, packageId, name, virtualPrice: virtualPriceValue };
+        } else {
+            // Create new item with specified action
+            pendingCartItem = { packageId, name, virtualPrice: virtualPriceValue, action };
+        }
+        
+        // Update popup with pricing
+        virtualPrice.textContent = `$${virtualPriceValue.toFixed(2)}`;
+        const inPersonData = inPersonPricing[packageId];
+        if (inPersonData) {
+            inPersonPrice.textContent = `$${inPersonData.price.toFixed(2)}`;
+        }
+        
+        // Hide discount popup if it's showing
+        if (discountPopup && discountPopup.classList.contains('show')) {
+            discountPopup.classList.remove('show');
+        }
+        
+        serviceTypePopup.classList.add('show');
+    }
+
+    // Hide service type popup
+    function hideServiceTypePopup() {
+        serviceTypePopup.classList.remove('show');
+        pendingCartItem = null;
+    }
+
+    // Add to cart with service type
+    function addToCartWithType(serviceType) {
+        if (!pendingCartItem) return;
+        
+        const { packageId, name, virtualPrice } = pendingCartItem;
+        let finalPrice = virtualPrice;
+        let displayName = name;
+        
+        // Create unique ID that includes service type
+        const uniqueId = `${packageId}-${serviceType}`;
+        
+        if (serviceType === 'in-person') {
+            const inPersonData = inPersonPricing[packageId];
+            if (inPersonData) {
+                finalPrice = inPersonData.price;
+                displayName = `${name} (In-Person)`;
+            }
+        } else {
+            displayName = `${name} (Virtual)`;
+        }
+        
+        addToCart(uniqueId, displayName, finalPrice);
+        hideServiceTypePopup();
+    }
+
+    // Service type popup event listeners
+    if (closeServiceType) {
+        closeServiceType.addEventListener('click', hideServiceTypePopup);
+    }
+    
+    if (cancelServiceType) {
+        cancelServiceType.addEventListener('click', hideServiceTypePopup);
+    }
+
+    // Close popup when clicking outside
+    if (serviceTypePopup) {
+        serviceTypePopup.addEventListener('click', function(e) {
+            if (e.target === serviceTypePopup) {
+                hideServiceTypePopup();
+            }
+        });
+    }
+
     // Add to cart button handlers
     const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
     console.log('Found add to cart buttons:', addToCartBtns.length);
@@ -190,9 +288,55 @@ document.addEventListener('DOMContentLoaded', function() {
             const name = this.getAttribute('data-name');
             
             console.log('Adding to cart:', packageId, name, price);
-            addToCart(packageId, name, price);
+            showServiceTypePopup(packageId, name, price, null);
         });
     });
+
+    // Buy now with service type
+    function buyNowWithType(serviceType) {
+        if (!pendingCartItem) return;
+        
+        const { packageId, name, virtualPrice } = pendingCartItem;
+        let finalPrice = virtualPrice;
+        let displayName = name;
+        
+        // Create unique ID that includes service type
+        const uniqueId = `${packageId}-${serviceType}`;
+        
+        if (serviceType === 'in-person') {
+            const inPersonData = inPersonPricing[packageId];
+            if (inPersonData) {
+                finalPrice = inPersonData.price;
+                displayName = `${name} (In-Person)`;
+            }
+        } else {
+            displayName = `${name} (Virtual)`;
+        }
+        
+        showBuyNowPopup(uniqueId, displayName, finalPrice);
+        hideServiceTypePopup();
+    }
+
+    // Update service type buttons for buy now
+    if (virtualBtn) {
+        virtualBtn.addEventListener('click', () => {
+            if (pendingCartItem && pendingCartItem.action === 'buy-now') {
+                buyNowWithType('virtual');
+            } else {
+                addToCartWithType('virtual');
+            }
+        });
+    }
+    
+    if (inPersonBtn) {
+        inPersonBtn.addEventListener('click', () => {
+            if (pendingCartItem && pendingCartItem.action === 'buy-now') {
+                buyNowWithType('in-person');
+            } else {
+                addToCartWithType('in-person');
+            }
+        });
+    }
 
     // Buy now button handlers
     const buyNowBtns = document.querySelectorAll('.buy-now-btn');
@@ -206,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const name = this.getAttribute('data-name');
             
             console.log('Buy now:', packageId, name, price);
-            showBuyNowPopup(packageId, name, price);
+            showServiceTypePopup(packageId, name, price, 'buy-now');
         });
     });
 
@@ -215,6 +359,11 @@ document.addEventListener('DOMContentLoaded', function() {
         cartIcon.addEventListener('click', function() {
             cartPopup.classList.add('show');
             updateCartDisplay();
+            
+            // Hide discount popup if it's showing when cart opens
+            if (discountPopup && discountPopup.classList.contains('show')) {
+                discountPopup.classList.remove('show');
+            }
         });
     }
 
@@ -432,6 +581,12 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         buyNowTotal.querySelector('.total-price').textContent = `$${formattedPrice}`;
+        
+        // Hide discount popup if it's showing
+        if (discountPopup && discountPopup.classList.contains('show')) {
+            discountPopup.classList.remove('show');
+        }
+        
         buyNowPopup.classList.add('show');
     }
 
@@ -658,9 +813,13 @@ document.addEventListener('DOMContentLoaded', function() {
         let startTime = Date.now();
         let popupShown = false;
         
-        // Show popup after 25 seconds total time spent (only if not dismissed and no purchase)
+        // Show popup after 25 seconds total time spent (only if not dismissed, no purchase, and no other popups are open)
         setTimeout(() => {
-            if (!popupShown && !popupDismissed && !hasPurchased) {
+            const isCartOpen = cartPopup && cartPopup.classList.contains('show');
+            const isBuyNowOpen = buyNowPopup && buyNowPopup.classList.contains('show');
+            const isServiceTypeOpen = serviceTypePopup && serviceTypePopup.classList.contains('show');
+            
+            if (!popupShown && !popupDismissed && !hasPurchased && !isCartOpen && !isBuyNowOpen && !isServiceTypeOpen) {
                 discountPopup.classList.add('show');
                 popupShown = true;
             }

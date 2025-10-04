@@ -64,6 +64,15 @@
         </div>
     </section>
 
+    <!-- Virtual Pricing Notice -->
+    <section class="pricing-notice">
+        <div class="container">
+            <div class="notice-content">
+                <p><strong>Note:</strong> Prices shown are for virtual tutoring services. In-person tutoring is available at different rates.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Elite Packages Row -->
     <section class="services-packages-section">
         <div class="container">
@@ -357,6 +366,36 @@
                 <p class="discount-description">Use this code at checkout to save on your first session with our expert tutors.</p>
                 <div class="discount-actions">
                     <a href="services.html" class="discount-cta-btn" id="viewServicesBtn">View Services</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Type Selection Popup -->
+    <div class="service-type-popup" id="serviceTypePopup">
+        <div class="service-type-popup-content">
+            <div class="service-type-popup-header">
+                <h3>Choose Service Type</h3>
+                <button class="close-service-type" id="closeServiceType">&times;</button>
+            </div>
+            <div class="service-type-popup-body">
+                <p>How would you like to receive your tutoring service?</p>
+                <div class="service-type-options">
+                    <button class="service-type-btn virtual-btn" data-type="virtual">
+                        <div class="service-type-info">
+                            <h4>Virtual Tutoring</h4>
+                            <p class="service-price" id="virtualPrice">$0.00</p>
+                        </div>
+                    </button>
+                    <button class="service-type-btn in-person-btn" data-type="in-person">
+                        <div class="service-type-info">
+                            <h4>In-Person Tutoring</h4>
+                            <p class="service-price" id="inPersonPrice">$0.00</p>
+                        </div>
+                    </button>
+                </div>
+                <div class="service-type-actions">
+                    <button class="cancel-service-type" id="cancelServiceType">Cancel</button>
                 </div>
             </div>
         </div>
