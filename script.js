@@ -288,7 +288,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const name = this.getAttribute('data-name');
             
             console.log('Adding to cart:', packageId, name, price);
-            showServiceTypePopup(packageId, name, price, null);
+            try {
+                showServiceTypePopup(packageId, name, price, null);
+            } catch (error) {
+                console.error('Error showing service type popup:', error);
+            }
         });
     });
 
@@ -350,7 +354,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const name = this.getAttribute('data-name');
             
             console.log('Buy now:', packageId, name, price);
-            showServiceTypePopup(packageId, name, price, 'buy-now');
+            try {
+                showServiceTypePopup(packageId, name, price, 'buy-now');
+            } catch (error) {
+                console.error('Error showing service type popup for buy now:', error);
+            }
         });
     });
 
@@ -410,9 +418,18 @@ document.addEventListener('DOMContentLoaded', function() {
     let stripe;
     
     // Initialize Stripe when available
-    if (typeof Stripe !== 'undefined') {
-        stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+    function initializeStripe() {
+        if (typeof Stripe !== 'undefined') {
+            stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+            console.log('Stripe initialized successfully');
+        } else {
+            // Retry after a short delay if Stripe isn't loaded yet
+            setTimeout(initializeStripe, 100);
+        }
     }
+    
+    // Start initialization
+    initializeStripe();
 
     // Checkout handler
     const checkoutBtn = document.getElementById('checkoutBtn');
