@@ -187,15 +187,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const virtualBtn = document.querySelector('.virtual-btn');
     const inPersonBtn = document.querySelector('.in-person-btn');
 
-    // In-person pricing data
+    // In-person pricing data (virtual price + $15/hour increase)
     const inPersonPricing = {
-        'elite': { price: 3499.99, hourly: '$70/hour' },
-        'sat-act-elite': { price: 2919.99, hourly: '$79/hour' },
-        'college-readiness': { price: 1274.99, hourly: '$85/hour' },
-        'standard': { price: 1599.99, hourly: '$80/hour' },
-        'starter': { price: 414.99, hourly: '$83/hour' },
-        'individual': { price: 84.95, hourly: '$84.95/hour' },
-        'college-individual': { price: 104.95, hourly: '$104.95/hour' }
+        'elite': { price: 3749.99, hourly: '$75/hour' }, // 50 hours × $75 = $3,750 → $3,749.99
+        'sat-act-elite': { price: 3119.99, hourly: '$78/hour' }, // 40 hours × $78 = $3,120 → $3,119.99
+        'college-readiness': { price: 1349.99, hourly: '$90/hour' }, // 15 hours × $90 = $1,350 → $1,349.99
+        'standard': { price: 1699.99, hourly: '$85/hour' }, // 20 hours × $85 = $1,700 → $1,699.99
+        'starter': { price: 439.99, hourly: '$88/hour' }, // 5 hours × $88 = $440 → $439.99
+        'individual': { price: 89.95, hourly: '$89.95/hour' }, // $74.95 + $15 = $89.95
+        'college-individual': { price: 109.95, hourly: '$109.95/hour' } // $94.95 + $15 = $109.95
     };
 
     // Store pending cart item
@@ -830,7 +830,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let startTime = Date.now();
         let popupShown = false;
         
-        // Show popup after 25 seconds total time spent (only if not dismissed, no purchase, and no other popups are open)
+        // Show popup after 40 seconds total time spent (only if not dismissed, no purchase, and no other popups are open)
         setTimeout(() => {
             const isCartOpen = cartPopup && cartPopup.classList.contains('show');
             const isBuyNowOpen = buyNowPopup && buyNowPopup.classList.contains('show');
@@ -840,7 +840,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 discountPopup.classList.add('show');
                 popupShown = true;
             }
-        }, Math.max(0, 25000 - totalTimeSpent));
+        }, Math.max(0, 40000 - totalTimeSpent));
         
         // Update total time when user leaves the page
         window.addEventListener('beforeunload', () => {
