@@ -150,6 +150,13 @@ document.addEventListener('DOMContentLoaded', function() {
         let cart = JSON.parse(localStorage.getItem('hermesCart')) || [];
         let cartCount = parseInt(localStorage.getItem('hermesCartCount')) || 0;
         
+        console.log('Loaded cart from localStorage:', cart);
+        console.log('Cart items types:', cart.map(item => ({
+            name: item.name,
+            price: typeof item.price,
+            quantity: typeof item.quantity
+        })));
+        
         // Ensure cart count is accurate on load
         const actualCount = cart.reduce((total, item) => total + item.quantity, 0);
         if (cartCount !== actualCount) {
@@ -435,6 +442,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const checkoutBtn = document.getElementById('checkoutBtn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function() {
+            console.log('Cart checkout button clicked');
+            console.log('Current cart:', cart);
+            console.log('Cart length:', cart.length);
+            
             if (cart.length === 0) {
                 alert('Your cart is empty!');
                 return;
@@ -443,6 +454,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Mark that user has made a purchase to prevent popup
             localStorage.setItem('hermesHasPurchased', 'true');
             
+            console.log('Calling initiateStripeCheckout with cart:', cart);
             initiateStripeCheckout(cart);
             cartPopup.classList.remove('show');
         });
@@ -450,26 +462,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     function initiateStripeCheckout(items) {
+        console.log('initiateStripeCheckout called with items:', items);
+        
         // Calculate total
         const total = items.reduce((sum, item) => {
             const itemTotal = Math.round((item.price * item.quantity) * 100) / 100;
             return Math.round((sum + itemTotal) * 100) / 100;
         }, 0);
         
+        console.log('Calculated total:', total);
+        
         // Create line items for Stripe
-        const lineItems = items.map(item => ({
-            price_data: {
-                currency: 'usd',
-                product_data: {
-                    name: item.name,
+        const lineItems = items.map(item => {
+            console.log('Processing item:', item);
+            console.log('Item price type:', typeof item.price, 'Value:', item.price);
+            console.log('Item quantity type:', typeof item.quantity, 'Value:', item.quantity);
+            
+            // Ensure price is a number
+            const price = parseFloat(item.price);
+            const quantity = parseInt(item.quantity);
+            
+            if (isNaN(price) || isNaN(quantity)) {
+                console.error('Invalid price or quantity:', { price: item.price, quantity: item.quantity });
+                throw new Error(`Invalid price or quantity: price=${item.price}, quantity=${item.quantity}`);
+            }
+            
+            return {
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: item.name,
+                    },
+                    unit_amount: Math.round(price * 100), // Stripe expects cents, ensure it's an integer
                 },
-                unit_amount: item.price * 100, // Stripe expects cents
-            },
-            quantity: item.quantity,
-        }));
+                quantity: quantity,
+            };
+        });
 
-        // For demo purposes, show what would be sent to Stripe
-        console.log('Would create Stripe checkout session with:', lineItems);
+        console.log('Created line items for Stripe:', lineItems);
         
         // This is where you would call your backend to create a Stripe checkout session
         createStripeCheckoutSession(lineItems);
@@ -567,6 +597,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function addToCart(packageId, name, price) {
+        console.log('addToCart called with:', { packageId, name, price, priceType: typeof price });
+        
+        // Ensure price is a number
+        const numericPrice = parseFloat(price);
+        if (isNaN(numericPrice)) {
+            console.error('Invalid price passed to addToCart:', price);
+            return;
+        }
+        
         const existingItem = cart.find(item => item.id === packageId);
         
         if (existingItem) {
@@ -575,13 +614,15 @@ document.addEventListener('DOMContentLoaded', function() {
             cart.push({
                 id: packageId,
                 name: name,
-                price: price,
+                price: numericPrice, // Store as number
                 quantity: 1
             });
         }
         
         cartCount++;
         updateCartCount();
+        updateCartDisplay();
+        saveCartToStorage();
         showCartNotification();
     }
 

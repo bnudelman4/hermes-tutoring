@@ -27,6 +27,12 @@ exports.handler = async (event, context) => {
 
   try {
     console.log('Received request body:', event.body);
+    
+    // Check if Stripe key is available
+    if (!process.env.STRIPE_SECRET_KEY) {
+      throw new Error('STRIPE_SECRET_KEY environment variable is not set');
+    }
+    
     const { items } = JSON.parse(event.body);
     console.log('Parsed items:', items);
 
