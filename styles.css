@@ -13,6 +13,62 @@
     box-sizing: border-box;
 }
 
+/* Optimize for better performance */
+* {
+    will-change: auto;
+}
+
+/* Smooth animations for better performance */
+.smooth-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Optimize button animations */
+.cta-button, .btn, button {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.cta-button:hover, .btn:hover, button:hover {
+    transform: translateY(-2px);
+}
+
+/* Optimize card animations */
+.testimonial-card, .service-card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.testimonial-card:hover, .service-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Optimize image rendering */
+img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    transform: translateZ(0); /* Force hardware acceleration */
+    backface-visibility: hidden;
+}
+
+/* Optimize sections for better performance */
+section, .container {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Optimize scroll performance */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 /* Pricing Notice */
 .pricing-notice {
     background: linear-gradient(135deg, #ff5722, #ff7043);
@@ -268,6 +324,8 @@ h3 {
     left: 0;
     right: 0;
     z-index: 1000;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+    will-change: transform, background-color;
 }
 
 .header .container {
@@ -2701,7 +2759,7 @@ h3 {
 @media (min-width: 992px) {
     .submit-testimonial-section {
         padding: 120px 80px !important;
-        margin: 60px 0 !important;
+        margin: 60px 0 0 0 !important;
         text-align: left !important;
     }
     
@@ -3098,7 +3156,7 @@ h3 {
 @media (min-width: 992px) {
     .submit-testimonial-section {
         padding: 120px 80px !important;
-        margin: 60px 0 !important;
+        margin: 60px 0 0 0 !important;
         background: linear-gradient(135deg, #2c5aa0, #1e3a5f) !important;
         text-align: left !important;
     }

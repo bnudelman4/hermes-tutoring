@@ -1,7 +1,20 @@
-// Smooth scrolling for navigation links
+// Smooth scrolling for navigation links with performance optimization
 document.addEventListener('DOMContentLoaded', function() {
     // Add smooth scrolling to all anchor links
     const links = document.querySelectorAll('a[href^="#"]');
+    
+    // Debounce function for better performance
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
     
     links.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -11,13 +24,44 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                // Use requestAnimationFrame for smoother animation
+                requestAnimationFrame(() => {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 });
             }
         });
     });
+
+    // Optimized scroll performance
+    let ticking = false;
+    function updateScrollPerformance() {
+        const scrolled = window.pageYOffset;
+        const header = document.querySelector('.header');
+        
+        if (header) {
+            if (scrolled > 100) {
+                header.style.transform = 'translateY(-2px)';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.transform = 'translateY(0)';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        }
+        
+        ticking = false;
+    }
+    
+    function requestScrollUpdate() {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollPerformance);
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', requestScrollUpdate, { passive: true });
 
     // Mobile menu toggle (for responsive design)
     const nav = document.querySelector('.nav');
