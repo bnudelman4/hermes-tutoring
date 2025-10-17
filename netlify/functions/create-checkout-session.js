@@ -43,21 +43,15 @@ exports.handler = async (event, context) => {
     // Items are already formatted as line items from the frontend
     const lineItems = items;
 
-    // Get the site URL from the request
-    const siteUrl = process.env.URL || 'https://hermestutoring.com';
-
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card', 'apple_pay', 'klarna'],
+      payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${siteUrl}/services.html`,
+      success_url: 'https://hermestutoring.com/success.html',
+      cancel_url: 'https://hermestutoring.com/services.html',
       allow_promotion_codes: true, // Enable coupon codes
       billing_address_collection: 'required', // Optional: require billing address
-      metadata: {
-        order_type: 'tutoring_package',
-      },
     });
 
     return {
@@ -70,14 +64,18 @@ exports.handler = async (event, context) => {
     console.error('Error details:', {
       message: error.message,
       stack: error.stack,
-      stripeKey: process.env.STRIPE_SECRET_KEY ? 'Set' : 'Not set'
+      stripeKey: process.env.STRIPE_SECRET_KEY ? 'Set' : 'Not set',
+      errorType: error.type,
+      errorCode: error.code
     });
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({ 
         error: 'Failed to create checkout session', 
-        details: error.message 
+        details: error.message,
+        type: error.type,
+        code: error.code
       }),
     };
   }
