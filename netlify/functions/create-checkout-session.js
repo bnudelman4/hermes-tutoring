@@ -43,15 +43,21 @@ exports.handler = async (event, context) => {
     // Items are already formatted as line items from the frontend
     const lineItems = items;
 
+    // Get the site URL from the request
+    const siteUrl = process.env.URL || 'https://hermestutoring.com';
+
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card', 'apple_pay', 'klarna'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: 'https://hermestutoring.com/success.html',
-      cancel_url: 'https://hermestutoring.com/services.html',
+      success_url: `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteUrl}/services.html`,
       allow_promotion_codes: true, // Enable coupon codes
       billing_address_collection: 'required', // Optional: require billing address
+      metadata: {
+        order_type: 'tutoring_package',
+      },
     });
 
     return {
