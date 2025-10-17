@@ -45,7 +45,7 @@ exports.handler = async (event, context) => {
 
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
+      payment_method_types: ['card', 'apple_pay', 'klarna'],
       line_items: lineItems,
       mode: 'payment',
       success_url: 'https://hermestutoring.com/success.html',
